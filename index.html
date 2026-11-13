@@ -1038,7 +1038,7 @@ async function caricaFeed(){
       const j=await r.json(); if(j.status!=='ok')throw 0;
       return j.items.map(it=>({f:F.fonte,d:it.pubDate,t:it.title,s:(it.description||'').replace(/<[^>]+>/g,'').slice(0,150).trim(),tema:classifica(it.title+' '+(it.categories||[]).join(' ')),u:it.link}));
     }));
-    const live=res.flat().sort((a,b)=>new Date(b.d)-new Date(a.d)).slice(0,9);
+    const live=res.flat().filter(n=>!/newsletter|iscriviti|abbonati|pubbliredazionale/i.test(n.t+' '+n.u)).sort((a,b)=>new Date(b.d)-new Date(a.d)).slice(0,9);
     if(!live.length)throw 0;
     const istituzionali=SNAPSHOT.filter(n=>n.f!=='PuntoSicuro').slice(0,2);
     renderNews([...live.slice(0,1),...istituzionali,...live.slice(1)]);
