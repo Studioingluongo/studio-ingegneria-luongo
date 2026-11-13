@@ -651,7 +651,7 @@ body.lock{overflow:hidden}
       </div>
     </div>
     <div class="team-grid">
-      <article class="tm rv"><div class="tm-foto"><span class="tm-cod mono">T.01</span><img src="img/gennaro-luongo.jpg" alt="Ing. Gennaro Luongo" loading="lazy"></div>
+      <article class="tm rv"><div class="tm-foto"><span class="tm-cod mono">T.01</span><img src="img/gennaro-luongo-ceo.jpg" alt="Ing. Gennaro Luongo" loading="lazy"></div>
         <div class="tm-info"><h3><small><span class="tm-ceo">CEO</span>ING.</small>Gennaro Luongo</h3><p>Ingegnere elettronico e della sicurezza</p></div></article>
       <article class="tm rv d1"><div class="tm-foto"><span class="tm-cod mono">T.02</span><img src="img/carmine-luongo.jpg" alt="Ing. Carmine Luongo" loading="lazy"></div>
         <div class="tm-info"><h3><small>ING.</small>Carmine Luongo</h3><p>Ingegnere edile</p></div></article>
@@ -735,7 +735,7 @@ body.lock{overflow:hidden}
         <div class="campo full"><label for="servizio">Servizio di interesse</label><select id="servizio"><option>Seleziona un servizio</option></select></div>
         <div class="campo full"><label for="msg">Messaggio</label><textarea id="msg" placeholder="Settore, numero di dipendenti, esigenza…"></textarea></div>
         <label class="privacy"><input type="checkbox" id="priv" required> Acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).</label>
-        <button class="btn" type="submit">Invia richiesta
+        <button class="btn" type="submit">Invia su WhatsApp
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button>
         <div class="esito" id="esito" aria-live="polite"></div>
       </form>
@@ -1083,14 +1083,27 @@ const menu=document.getElementById('menu');
 document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
 menu.querySelectorAll('a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
 
-/* ---------- Form (anteprima: nessun invio reale) ---------- */
+/* ---------- Form → WhatsApp dello Studio ---------- */
+const WA_NUM='390812597443';
 document.getElementById('form').addEventListener('submit',e=>{
   e.preventDefault();
-  const es=document.getElementById('esito');
-  const nome=document.getElementById('nome').value.trim(), mail=document.getElementById('email').value.trim();
-  if(!nome||!/^\S+@\S+\.\S+$/.test(mail)){es.textContent='Inserisci nome ed email validi.';return}
+  const es=document.getElementById('esito'), v=id=>document.getElementById(id).value.trim();
+  const nome=v('nome'), mail=v('email'), tel=v('tel'), az=v('azienda'), msg=v('msg');
+  const serv=sel.selectedIndex>0?sel.value:'';
+  if(!nome){es.textContent='Inserisci nome e cognome.';return}
+  if(!mail&&!tel){es.textContent='Inserisci almeno un recapito: email o telefono.';return}
+  if(mail&&!/^\S+@\S+\.\S+$/.test(mail)){es.textContent='Controlla l\'indirizzo email.';return}
   if(!document.getElementById('priv').checked){es.textContent='È necessario accettare l\'informativa privacy.';return}
-  es.textContent='Grazie '+nome.split(' ')[0]+'! In questa anteprima il modulo non invia dati: scrivi a info@studioingegnerialuongo.com o chiama +39 081 259 7443.';
+  const righe=['*Richiesta di consulenza dal sito*','','Nome: '+nome];
+  if(az)righe.push('Azienda: '+az);
+  if(mail)righe.push('Email: '+mail);
+  if(tel)righe.push('Telefono: '+tel);
+  if(serv)righe.push('Servizio: '+serv);
+  if(msg)righe.push('','Messaggio:',msg);
+  const url='https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(righe.join('\n'));
+  const w=window.open(url,'_blank','noopener');
+  if(!w)location.href=url;
+  es.textContent='Si sta aprendo WhatsApp con la tua richiesta già compilata: premi Invia per inviarla allo Studio.';
 });
 </script>
 </body>
