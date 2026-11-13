@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Ingegneria Luongo — Sicurezza, Progettazione, Formazione</title>
+<meta name="description" content="Studio Ingegneria Luongo, San Giuseppe Vesuviano (NA): sicurezza sul lavoro, RSPP, CSP/CSE, prevenzione incendi, progettazione, certificazioni energetiche, formazione.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ PALETTE UFFICIALE (usare anche per i social) ============
+   Blu Progetto  #0E2A3D  — colore istituzionale, sfondi scuri
+   Inchiostro    #081A27  — testi, footer
+   Arancio Sicurezza #E8622C — accento, call to action
+   Acciaio       #7B8C99  — testi secondari, linee
+   Carta Tecnica #F3F0EA  — sfondo chiaro
+   Bianco        #FFFFFF
+   ====================================================================== */
+:root{
+  --blu:#0E2A3D; --ink:#081A27; --arancio:#E8622C; --arancio-2:#C94E1C;
+  --acciaio:#7B8C99; --carta:#F3F0EA; --bianco:#FFFFFF;
+  --linea:rgba(14,42,61,.14); --linea-chiara:rgba(255,255,255,.12);
+  --f-titolo:'Archivo',system-ui,sans-serif;
+  --f-testo:'IBM Plex Sans',system-ui,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --max:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-testo);color:var(--ink);background:var(--carta);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+.mono{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--f-titolo);line-height:1.04;letter-spacing:-.02em}
+
+/* ---------- Barra progresso a righello ---------- */
+.righello{position:fixed;top:0;left:0;right:0;height:4px;z-index:100;background:transparent}
+.righello span{display:block;height:100%;width:0;background:var(--arancio);transition:width .1s linear}
+
+/* ---------- Header ---------- */
+header{position:fixed;top:4px;left:0;right:0;z-index:90;transition:background .35s, box-shadow .35s, color .35s;color:var(--bianco)}
+header.scrolled{background:rgba(243,240,234,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);box-shadow:0 1px 0 var(--linea)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-mark{width:40px;height:40px;flex:none}
+.logo-txt{font-family:var(--f-titolo);font-weight:800;font-size:15px;letter-spacing:.06em;line-height:1.1}
+.logo-txt small{display:block;font-family:var(--f-mono);font-weight:400;font-size:10px;letter-spacing:.18em;opacity:.7}
+.menu{display:flex;gap:34px;align-items:center}
+.menu a{font-size:14px;font-weight:500;position:relative;padding:4px 0}
+.menu a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--arancio);transition:width .3s}
+.menu a:not(.btn):hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--arancio);color:var(--bianco)!important;padding:12px 22px;font-weight:600;font-size:14px;border-radius:2px;transition:background .25s, transform .25s}
+.btn:hover{background:var(--arancio-2);transform:translateY(-2px)}
+.btn-ghost{background:transparent;border:1px solid currentColor;color:inherit!important}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.burger{display:none;background:none;border:0;color:inherit;cursor:pointer;width:40px;height:40px}
+.burger span{display:block;height:2px;background:currentColor;margin:7px 6px;transition:.3s}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100vh;background:var(--blu);color:var(--bianco);overflow:hidden;display:flex;align-items:center}
+.griglia{position:absolute;inset:0;background-image:
+  linear-gradient(var(--linea-chiara) 1px,transparent 1px),
+  linear-gradient(90deg,var(--linea-chiara) 1px,transparent 1px),
+  linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+  mask-image:radial-gradient(ellipse at 70% 50%,#000 30%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse at 70% 50%,#000 30%,transparent 80%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding-top:120px;padding-bottom:90px}
+.hero-tag{display:inline-flex;gap:10px;align-items:center;color:var(--arancio);margin-bottom:26px}
+.hero-tag::before{content:"";width:28px;height:1px;background:var(--arancio)}
+.hero h1{font-size:clamp(44px,6.4vw,88px);font-weight:800}
+.hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--bianco)}
+.hero h1 .acc{color:var(--arancio)}
+.hero p.lead{font-size:18px;max-width:520px;margin:28px 0 40px;color:rgba(255,255,255,.78)}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.disegno{position:relative;width:100%;aspect-ratio:1/1;max-width:560px;justify-self:end}
+.disegno svg{width:100%;height:100%}
+.disegno .tratto{stroke-dasharray:1200;stroke-dashoffset:1200;animation:disegna 2.6s cubic-bezier(.6,.1,.2,1) forwards}
+.disegno .t2{animation-delay:.5s}.disegno .t3{animation-delay:1s}.disegno .t4{animation-delay:1.4s}
+.disegno .quota{opacity:0;animation:appari .8s 2.2s forwards}
+.disegno .tetto{opacity:0;animation:appari 1s 1.1s forwards}
+.disegno .tetto.t-del{animation-delay:1.5s}
+.disegno svg{overflow:visible}
+.disegno .pendolo{transform-origin:382px 140px;animation:oscilla 5s ease-in-out 2.6s infinite}
+.disegno .gancio{animation:trasla 14s ease-in-out 2.6s infinite}
+@keyframes oscilla{0%,100%{transform:rotate(1.6deg)}50%{transform:rotate(-1.6deg)}}
+@keyframes trasla{0%,100%{transform:translateX(0)}50%{transform:translateX(-60px)}}
+@keyframes disegna{to{stroke-dashoffset:0}}
+@keyframes appari{to{opacity:1}}
+.hero-meta{position:absolute;left:0;right:0;bottom:0;border-top:1px solid var(--linea-chiara)}
+.hero-meta .wrap{display:flex;justify-content:space-between;padding-top:18px;padding-bottom:18px;color:rgba(255,255,255,.55)}
+.scroll-hint{display:flex;align-items:center;gap:10px}
+.scroll-hint i{width:1px;height:26px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.scroll-hint i::after{content:"";position:absolute;left:0;top:-26px;width:1px;height:26px;background:var(--arancio);animation:scorri 1.8s infinite}
+@keyframes scorri{to{top:26px}}
+
+/* ---------- Nastro abilitazioni ---------- */
+.nastro{background:var(--arancio);color:var(--bianco);overflow:hidden;padding:18px 0;white-space:nowrap}
+.nastro-track{display:inline-flex;gap:48px;animation:nastro 40s linear infinite;font-family:var(--f-titolo);font-weight:700;font-size:20px;letter-spacing:.01em}
+.nastro-track span{display:inline-flex;align-items:center;gap:48px}
+.nastro-track span::after{content:"";width:8px;height:8px;background:var(--bianco);transform:rotate(45deg)}
+@keyframes nastro{to{transform:translateX(-50%)}}
+
+/* ---------- Sezioni ---------- */
+section{position:relative}
+.sez{padding:140px 0}
+.sez-head{display:grid;grid-template-columns:200px 1fr;gap:40px;margin-bottom:72px}
+.sez-num{color:var(--arancio);padding-top:14px;border-top:2px solid var(--arancio);align-self:start}
+.sez-head h2{font-size:clamp(34px,4.4vw,60px);font-weight:800;max-width:860px}
+.sez-head p{margin-top:22px;max-width:640px;color:#3a4b58;font-size:17px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.linea-rv{height:1px;background:var(--linea);transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.6,.1,.2,1)}
+.linea-rv.in{transform:scaleX(1)}
+
+/* ---------- Studio ---------- */
+.studio-grid{display:grid;grid-template-columns:200px 1fr 1fr;gap:40px}
+.studio-grid .testo{font-size:22px;line-height:1.5;font-family:var(--f-titolo);font-weight:500;letter-spacing:-.01em}
+.studio-grid .testo b{color:var(--arancio);font-weight:700}
+.studio-grid .side p{color:#3a4b58;margin-bottom:18px}
+.numeri{display:grid;grid-template-columns:repeat(4,1fr);margin-top:90px;border-top:1px solid var(--linea)}
+.numero{padding:34px 28px 10px 0;border-right:1px solid var(--linea)}
+.numero:last-child{border-right:0}
+.numero b{display:block;font-family:var(--f-titolo);font-size:clamp(48px,6vw,84px);font-weight:800;color:var(--blu);line-height:1}
+.numero span{color:var(--acciaio);display:block;margin-top:12px}
+
+/* ---------- Servizi (sezione scura) ---------- */
+.servizi{background:var(--ink);color:var(--bianco)}
+.servizi .sez-head p{color:rgba(255,255,255,.65)}
+.filtri{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:46px}
+.filtri button{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:rgba(255,255,255,.7);border:1px solid var(--linea-chiara);padding:10px 16px;cursor:pointer;transition:.25s;border-radius:2px}
+.filtri button:hover{color:var(--bianco);border-color:rgba(255,255,255,.4)}
+.filtri button.on{background:var(--arancio);border-color:var(--arancio);color:var(--bianco)}
+.serv-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--linea-chiara);border-left:1px solid var(--linea-chiara)}
+.serv{position:relative;padding:34px 28px 30px;border-right:1px solid var(--linea-chiara);border-bottom:1px solid var(--linea-chiara);min-height:250px;display:flex;flex-direction:column;overflow:hidden;transition:opacity .4s, filter .4s}
+.serv::before{content:"";position:absolute;inset:0;background:var(--blu);transform:translateY(101%);transition:transform .5s cubic-bezier(.6,.1,.2,1);z-index:0}
+.serv:hover::before{transform:none}
+.serv>*{position:relative;z-index:1}
+.serv .cod{color:var(--arancio);margin-bottom:auto}
+.serv .ico{width:38px;height:38px;margin:22px 0 18px;color:var(--bianco)}
+.serv h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.serv p{font-size:14px;color:rgba(255,255,255,.62);line-height:1.55}
+.serv .frec{position:absolute;top:30px;right:26px;width:18px;height:18px;transform:translate(-6px,6px);opacity:0;transition:.4s;color:var(--arancio)}
+.serv:hover .frec{opacity:1;transform:none}
+.serv.off{opacity:.18;filter:grayscale(1)}
+
+/* ---------- Metodo (sticky) ---------- */
+.metodo-wrap{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.metodo-sticky{position:sticky;top:120px;align-self:start;height:calc(100vh - 200px);max-height:620px;display:flex;flex-direction:column;justify-content:space-between}
+.metodo-sticky h2{font-size:clamp(34px,4.4vw,60px);font-weight:800}
+.contatore{font-family:var(--f-titolo);font-size:clamp(120px,16vw,220px);font-weight:800;line-height:.85;color:transparent;-webkit-text-stroke:2px var(--blu);display:flex;align-items:flex-end;gap:10px}
+.contatore small{font-family:var(--f-mono);font-size:14px;-webkit-text-stroke:0;color:var(--acciaio);font-weight:400;margin-bottom:16px}
+.passi{display:flex;flex-direction:column;gap:0}
+.passo{padding:70px 0;border-top:1px solid var(--linea);opacity:.28;transition:opacity .5s}
+.passo.att{opacity:1}
+.passo .mono{color:var(--arancio)}
+.passo h3{font-size:34px;font-weight:700;margin:14px 0 16px}
+.passo p{color:#3a4b58;font-size:17px;max-width:480px}
+
+/* ---------- Abilitazioni ---------- */
+.abil{background:var(--bianco)}
+.abil-list{border-top:1px solid var(--linea)}
+.abil-row{display:grid;grid-template-columns:200px 1fr auto;gap:40px;align-items:center;padding:28px 0;border-bottom:1px solid var(--linea);position:relative;transition:padding .4s}
+.abil-row::before{content:"";position:absolute;left:-28px;right:-28px;top:0;bottom:0;background:var(--carta);opacity:0;transition:opacity .3s;z-index:0}
+.abil-row:hover::before{opacity:1}
+.abil-row>*{position:relative}
+.abil-row .mono{color:var(--acciaio)}
+.abil-row h3{font-size:clamp(20px,2.3vw,30px);font-weight:700}
+.abil-row .badge{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--blu);color:var(--blu);padding:6px 12px;border-radius:30px;white-space:nowrap}
+
+/* ---------- Progetti ---------- */
+.prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.prog{position:relative;background:var(--blu);color:var(--bianco);aspect-ratio:16/11;padding:34px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.prog:nth-child(even){transform:translateY(70px)}
+.prog .fondo{position:absolute;inset:0;opacity:.5;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.prog:hover .fondo{transform:scale(1.08) rotate(-1deg)}
+.prog>*{position:relative}
+.prog-top{display:flex;justify-content:space-between;color:rgba(255,255,255,.6)}
+.prog h3{font-size:clamp(26px,3vw,40px);font-weight:800}
+.prog .settore{color:var(--arancio);margin-top:10px}
+.prog.p2{background:#163a52}.prog.p3{background:var(--ink)}.prog.p4{background:#1d4a63}
+
+/* ---------- FAD ---------- */
+.fad{background:var(--arancio);color:var(--bianco);padding:90px 0;overflow:hidden}
+.fad .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+.fad h2{font-size:clamp(32px,4.2vw,56px);font-weight:800}
+.fad p{margin-top:16px;font-size:17px;opacity:.9;max-width:560px}
+.fad .btn{background:var(--ink);justify-self:end}
+.fad .btn:hover{background:var(--blu)}
+
+/* ---------- Contatti ---------- */
+.contatti{background:var(--blu);color:var(--bianco)}
+.contatti .sez-head p{color:rgba(255,255,255,.65)}
+.cont-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:70px}
+.info-blk{border-top:1px solid var(--linea-chiara);padding:26px 0}
+.info-blk .mono{color:var(--arancio);margin-bottom:8px;display:block}
+.info-blk div{font-size:19px;font-family:var(--f-titolo);font-weight:600}
+.info-blk a:hover{color:var(--arancio)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;align-content:start}
+.campo{display:flex;flex-direction:column;gap:8px}
+.campo.full{grid-column:1/-1}
+.campo label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.campo input,.campo select,.campo textarea{font-family:var(--f-testo);font-size:16px;color:var(--bianco);background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);padding:10px 0;outline:none;transition:border-color .3s;border-radius:0}
+.campo select option{color:var(--ink)}
+.campo textarea{resize:vertical;min-height:110px}
+.campo input:focus,.campo select:focus,.campo textarea:focus{border-color:var(--arancio)}
+.privacy{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:rgba(255,255,255,.6)}
+.privacy input{margin-top:4px;accent-color:var(--arancio)}
+form .btn{grid-column:1/-1;justify-self:start;border:0;cursor:pointer;font-family:var(--f-testo)}
+.esito{grid-column:1/-1;font-size:14px;color:var(--arancio);min-height:20px}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:80px 0 30px}
+.foot-big{font-family:var(--f-titolo);font-weight:800;font-size:clamp(46px,10.5vw,160px);line-height:.9;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18);letter-spacing:-.03em;margin-bottom:60px;white-space:nowrap}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid var(--linea-chiara)}
+.foot-grid h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--arancio);margin-bottom:16px;font-weight:500}
+.foot-grid a{display:block;margin-bottom:8px;font-size:14px;transition:color .2s}
+.foot-grid a:hover{color:var(--bianco)}
+.foot-bot{display:flex;justify-content:space-between;padding-top:24px;font-size:12px}
+.social{display:flex;gap:10px;margin-top:20px}
+.social a{width:40px;height:40px;border:1px solid var(--linea-chiara);display:grid;place-items:center;border-radius:50%;transition:.25s}
+.social a:hover{background:var(--arancio);border-color:var(--arancio)}
+.social svg{width:16px;height:16px}
+
+.menu a.nav-fad{display:inline-flex;align-items:center;gap:7px;border:1px solid currentColor;padding:9px 14px;border-radius:2px}
+.menu a.nav-fad::after{display:none}
+.menu a.nav-fad:hover{border-color:var(--arancio);color:var(--arancio)}
+/* ---------- Logo ---------- */
+.logo-svg{height:54px;width:131px;display:block}
+.logo-foot{height:84px;width:204px}
+
+/* ---------- Osservatorio (news + fonti) ---------- */
+.oss{background:var(--carta);border-top:1px solid var(--linea)}
+.oss-bar{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+.stato{display:inline-flex;align-items:center;gap:10px;color:var(--acciaio)}
+.stato i{width:8px;height:8px;border-radius:50%;background:var(--acciaio)}
+.stato.live i{background:#2BA84A;box-shadow:0 0 0 0 rgba(43,168,74,.6);animation:pulsa 1.8s infinite}
+@keyframes pulsa{70%{box-shadow:0 0 0 9px rgba(43,168,74,0)}100%{box-shadow:0 0 0 0 rgba(43,168,74,0)}}
+.temi{display:flex;flex-wrap:wrap;gap:8px}
+.temi button{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--linea);color:var(--blu);padding:8px 14px;border-radius:30px;cursor:pointer;transition:.25s}
+.temi button:hover{border-color:var(--blu)}
+.temi button.on{background:var(--blu);color:var(--bianco);border-color:var(--blu)}
+.news-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:0;border-top:2px solid var(--blu)}
+.news{display:flex;flex-direction:column;gap:14px;padding:28px 26px 30px;border-bottom:1px solid var(--linea);border-right:1px solid var(--linea);background:transparent;transition:background .3s;position:relative}
+.news:nth-child(3n){border-right:0}
+.news:hover{background:var(--bianco)}
+.news-meta{display:flex;justify-content:space-between;gap:10px;color:var(--acciaio)}
+.news-meta .fonte{color:var(--arancio)}
+.news h3{font-size:19px;font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.news p{font-size:14px;color:#3a4b58}
+.news .tema{margin-top:auto;align-self:flex-start;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;background:rgba(232,98,44,.1);color:var(--arancio-2);padding:5px 10px;border-radius:2px}
+.news .leggi{position:absolute;right:24px;bottom:28px;color:var(--blu);opacity:0;transform:translate(-6px,6px);transition:.35s}
+.news:hover .leggi{opacity:1;transform:none}
+.news.big{grid-row:span 2;background:var(--blu);color:var(--bianco);justify-content:flex-end;min-height:380px}
+.news.big:hover{background:#133650}
+.news.big h3{font-size:clamp(24px,2.6vw,34px)}
+.news.big p{color:rgba(255,255,255,.7);font-size:15px}
+.news.big .news-meta{color:rgba(255,255,255,.55)}
+.news.big .tema{background:var(--arancio);color:var(--bianco);margin-top:0}
+.news.big .leggi{color:var(--arancio)}
+.news.nascosta{display:none}
+.oss-nota{margin-top:22px;font-size:13px;color:var(--acciaio)}
+.fonti-head{display:flex;justify-content:space-between;align-items:end;margin:90px 0 26px;gap:20px;flex-wrap:wrap}
+.fonti-head h3{font-size:clamp(24px,2.6vw,34px);font-weight:800}
+.fonti-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fonte-card{background:var(--bianco);border:1px solid var(--linea);padding:22px 20px;display:flex;flex-direction:column;gap:8px;transition:border-color .3s, transform .3s, box-shadow .3s}
+.fonte-card:hover{border-color:var(--arancio);transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(14,42,61,.35)}
+.fonte-card b{font-family:var(--f-titolo);font-size:17px;color:var(--blu)}
+.fonte-card span{font-size:13px;color:#3a4b58;line-height:1.45}
+.fonte-card em{font-style:normal;margin-top:auto;padding-top:10px;color:var(--arancio)}
+
+
+/* ---------- Pannello di dettaglio (modale) ---------- */
+button.serv{font:inherit;color:inherit;text-align:left;background:transparent;border:0;border-right:1px solid var(--linea-chiara);border-bottom:1px solid var(--linea-chiara);cursor:pointer}
+.serv .apri{margin-top:18px;color:var(--arancio);font-size:11px}
+.serv:focus-visible,.prog:focus-visible,.tm:focus-visible{outline:2px solid var(--arancio);outline-offset:-2px}
+button.prog{font:inherit;text-align:left;border:0;cursor:pointer;width:100%}
+.prog .apri{color:var(--arancio);margin-top:14px;display:inline-block}
+.dlg{position:fixed;inset:0;z-index:200;display:flex;justify-content:flex-end;pointer-events:none}
+.dlg-bg{position:absolute;inset:0;background:rgba(8,26,39,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;transition:opacity .4s}
+.dlg-panel{position:relative;width:min(720px,100%);height:100%;background:var(--carta);color:var(--ink);overflow-y:auto;transform:translateX(100%);transition:transform .55s cubic-bezier(.6,.1,.2,1);display:flex;flex-direction:column}
+.dlg.open{pointer-events:auto}
+.dlg.open .dlg-bg{opacity:1}
+.dlg.open .dlg-panel{transform:none}
+.dlg-top{flex-shrink:0;position:relative;background:var(--blu);color:var(--bianco);padding:34px 44px 40px;overflow:hidden}
+.dlg-top::after{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--linea-chiara) 1px,transparent 1px),linear-gradient(90deg,var(--linea-chiara) 1px,transparent 1px);background-size:28px 28px;opacity:.6;pointer-events:none}
+.dlg-top>*{position:relative;z-index:1}
+.dlg-x{position:absolute;top:22px;right:22px;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;transition:.25s}
+.dlg-x:hover{background:var(--arancio);border-color:var(--arancio);transform:rotate(90deg)}
+.dlg-cod{color:var(--arancio)}
+.dlg-ico{width:46px;height:46px;margin:26px 0 18px}
+.dlg-top h2{font-size:clamp(30px,4vw,46px);font-weight:800;max-width:520px}
+.dlg-sub{margin-top:14px;color:rgba(255,255,255,.72);max-width:540px}
+.dlg-body{padding:40px 44px 50px;display:flex;flex-direction:column;gap:34px;flex:1 0 auto}
+.dlg-body h4{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--arancio);font-weight:500;margin-bottom:12px}
+.dlg-body p{font-size:16px;color:#2a3b48}
+.dlg-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 26px;border-top:1px solid var(--linea)}
+.dlg-list li{padding:12px 0 12px 22px;border-bottom:1px solid var(--linea);position:relative;font-size:14.5px;line-height:1.45}
+.dlg-list li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;border:2px solid var(--arancio);transform:rotate(45deg)}
+.dlg-norme{display:flex;flex-wrap:wrap;gap:8px}
+.dlg-norme span{font-family:var(--f-mono);font-size:11.5px;border:1px solid var(--blu);color:var(--blu);padding:6px 12px;border-radius:30px}
+.dlg-dati{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+.dlg-dati div{padding:18px 16px 18px 0}
+.dlg-dati div+div{padding-left:16px;border-left:1px solid var(--linea)}
+.dlg-dati small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--acciaio);margin-bottom:6px}
+.dlg-dati b{font-family:var(--f-titolo);font-size:19px;color:var(--blu)}
+.dlg-foot{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:auto;padding-top:10px}
+.dlg-foot .btn{border:0;cursor:pointer;font-family:var(--f-testo)}
+.dlg-nav{margin-left:auto;display:flex;gap:8px}
+.dlg-nav button{width:44px;height:44px;border:1px solid var(--linea);background:transparent;border-radius:50%;cursor:pointer;color:var(--blu);transition:.25s}
+.dlg-nav button:hover{background:var(--blu);color:#fff}
+body.lock{overflow:hidden}
+
+/* ---------- Team ---------- */
+.team{background:var(--ink);color:var(--bianco)}
+.team .sez-head p{color:rgba(255,255,255,.65)}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.tm{position:relative}
+.tm-foto{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--blu)}
+.tm-foto img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transform:scale(1.04);transition:filter .7s, transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tm:hover .tm-foto img{filter:none;transform:scale(1)}
+.tm-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,26,39,.85));pointer-events:none}
+.tm-foto::before{content:"";position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--arancio);z-index:2;transition:width .6s cubic-bezier(.6,.1,.2,1)}
+.tm:hover .tm-foto::before{width:100%}
+.tm-cod{position:absolute;top:14px;left:14px;z-index:2;color:#fff;background:rgba(8,26,39,.55);padding:5px 9px;backdrop-filter:blur(4px)}
+.tm-info{padding:20px 2px 0}
+.tm-info h3{font-size:22px;font-weight:800}
+.tm-info h3 small{display:block;font-family:var(--f-mono);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--arancio);margin-bottom:6px}
+.tm-info p{margin-top:8px;color:rgba(255,255,255,.65);font-size:14px}
+.tm:nth-child(even){margin-top:60px}
+
+/* ---------- Responsive ---------- */
+.menu a{white-space:nowrap}
+.menu a.btn{padding:12px 22px}
+@media (max-width:1180px){
+  .menu{position:fixed;inset:80px 0 auto 0;background:var(--carta);color:var(--ink);flex-direction:column;align-items:flex-start;padding:30px;gap:22px;transform:translateY(-130%);transition:transform .45s;box-shadow:0 20px 40px rgba(0,0,0,.15)}
+  .menu.open{transform:none}
+  .burger{display:block}
+}
+@media (max-width:1024px){
+  .serv-grid{grid-template-columns:repeat(2,1fr)}
+  .studio-grid{grid-template-columns:1fr}
+  .metodo-wrap{grid-template-columns:1fr;gap:20px}
+  .metodo-sticky{position:relative;top:0;height:auto}
+  .contatore{display:none}
+  .passo{opacity:1;padding:44px 0}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:1024px){
+  .team-grid{grid-template-columns:1fr 1fr}
+  .news-grid{grid-template-columns:1fr 1fr}
+  .news.big{grid-column:1/-1;grid-row:auto;min-height:300px}
+  .news:nth-child(3n){border-right:1px solid var(--linea)}
+  .fonti-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:820px){
+  .logo-svg{height:46px;width:112px}
+  .hero .wrap{grid-template-columns:1fr;padding-top:130px}
+  .disegno{max-width:360px;justify-self:center;order:-1;margin-bottom:-20px}
+  .sez{padding:96px 0}
+  .sez-head{grid-template-columns:1fr;gap:18px;margin-bottom:48px}
+  .numeri{grid-template-columns:1fr 1fr}
+  .numero:nth-child(2){border-right:0}
+  .abil-row{grid-template-columns:1fr;gap:8px}
+  .prog-grid{grid-template-columns:1fr}
+  .prog:nth-child(even){transform:none}
+  .fad .wrap,.cont-grid{grid-template-columns:1fr}
+  .fad .btn{justify-self:start}
+  form{grid-template-columns:1fr}
+  .hero-meta .wrap span:nth-child(2){display:none}
+}
+@media (max-width:560px){
+  .dlg-list{grid-template-columns:1fr}
+  .dlg-top{padding:30px 24px 32px}.dlg-body{padding:30px 24px 40px}
+  .dlg-dati{grid-template-columns:1fr}.dlg-dati div+div{padding-left:0;border-left:0;border-top:1px solid var(--linea)}
+  .tm:nth-child(even){margin-top:0}
+  .news-grid,.fonti-grid{grid-template-columns:1fr}
+  .news{border-right:0!important}
+  .serv-grid{grid-template-columns:1fr}
+  .serv{min-height:0}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-bot{flex-direction:column;gap:8px}
+  .logo-txt small{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}.linea-rv{transform:none}
+  .disegno .tratto{stroke-dashoffset:0}.disegno .quota,.disegno .tetto{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo-luongo" viewBox="0 0 1240 512"><path fill="currentColor" fill-rule="evenodd" d="M16.7 495.3C15.3 494.0 16.0 484.2 17.6 482.6C19.0 481.1 75.0 481.0 618.8 481.0C1155.3 481.0 1218.8 481.2 1220.7 482.5C1223.4 484.4 1224.7 490.2 1223.1 493.6L1222.0 496.0L619.7 496.0C288.4 496.0 17.0 495.7 16.7 495.3ZM46.7 441.2C41.6 437.4 40.2 435.2 38.5 427.5C36.7 419.9 37.2 417.2 40.4 416.4C47.1 414.7 49.9 417.0 51.7 425.5C52.7 430.2 56.2 432.7 60.4 431.6C63.3 430.9 67.0 425.8 67.0 422.5C67.0 417.9 61.9 409.9 54.3 402.3C43.8 391.9 40.4 386.8 39.0 379.2C36.7 366.1 41.3 354.4 49.8 352.0C55.7 350.4 66.0 350.8 70.0 352.8C75.2 355.4 80.0 363.1 80.0 368.9C80.0 374.4 78.8 376.0 74.4 376.0C69.3 376.0 68.0 375.1 67.4 370.9C66.7 366.5 64.6 364.3 60.3 363.4C53.5 362.0 49.8 370.8 53.5 379.6C54.3 381.5 59.4 387.7 64.9 393.4C77.6 406.7 80.0 411.2 80.0 422.0C80.0 428.9 79.6 430.8 77.5 434.5C76.1 436.8 73.2 439.9 71.0 441.4C67.5 443.7 66.0 444.0 58.7 444.0C51.2 444.0 50.0 443.7 46.7 441.2ZM104.0 442.1C103.4 440.8 103.0 426.7 103.0 403.1C103.0 361.2 103.6 364.0 94.8 364.0C88.7 364.0 87.8 363.1 88.2 357.4L88.5 352.5L95.0 351.7C102.0 350.9 129.4 351.5 131.0 352.5C132.4 353.4 132.2 361.4 130.8 362.8C130.1 363.5 127.2 364.0 124.4 364.0C115.5 364.0 116.0 361.8 116.0 405.0C116.0 447.1 116.6 444.0 109.0 444.0C106.1 444.0 104.8 443.5 104.0 442.1ZM148.8 440.0C141.4 433.5 141.0 430.9 141.0 388.7L141.0 353.1L144.5 352.1C148.1 351.1 151.6 351.6 153.8 353.3C154.7 354.0 155.0 362.2 155.0 387.9C155.0 406.4 155.5 423.3 156.0 425.5C157.6 432.5 163.0 434.1 168.1 429.1L171.0 426.2L171.0 390.8C171.0 362.8 171.3 355.0 172.3 353.6C174.0 351.3 181.7 351.0 183.1 353.1C183.6 353.9 184.0 371.3 184.0 391.8L184.0 429.1L181.1 434.1C179.5 436.9 176.6 440.2 174.7 441.6C171.6 443.7 170.0 444.0 162.2 444.0L153.3 444.0L148.8 440.0ZM199.2 442.8C197.3 440.9 197.5 354.7 199.4 353.1C200.7 352.0 211.2 351.4 223.3 351.8C230.0 352.0 230.3 352.1 235.1 356.8C239.8 361.3 240.1 361.8 241.0 369.0C242.2 378.6 242.2 412.9 241.0 424.2C239.9 434.8 237.8 438.2 230.1 441.6C225.4 443.7 223.2 444.0 212.6 444.0C204.4 444.0 200.0 443.6 199.2 442.8ZM256.0 442.1C255.4 440.8 255.0 425.1 255.0 397.8C255.0 350.9 254.9 351.6 261.1 351.6C268.6 351.6 268.0 347.9 268.0 397.3C268.0 430.4 267.7 441.9 266.8 442.8C266.1 443.5 263.7 444.0 261.3 444.0C258.1 444.0 256.8 443.5 256.0 442.1ZM292.5 442.1C287.5 439.0 284.2 434.7 283.1 430.0C282.5 427.4 282.1 413.0 282.1 396.5C282.1 363.1 282.6 360.0 289.3 354.6C293.1 351.6 293.5 351.5 303.7 351.5L314.1 351.5L319.0 356.6C323.6 361.5 323.8 361.9 324.5 369.1C324.9 373.2 325.0 388.9 324.8 404.0L324.5 431.5L321.7 435.6C317.5 441.8 312.8 444.0 303.4 444.0C297.4 444.0 294.8 443.5 292.5 442.1ZM363.2 442.8C361.5 441.1 361.5 354.9 363.2 353.2C365.1 351.3 374.6 351.6 375.4 353.6C375.7 354.5 376.0 374.6 376.0 398.4C376.0 430.7 375.7 441.9 374.8 442.8C373.2 444.4 364.8 444.4 363.2 442.8ZM391.2 442.8C389.3 440.9 389.5 354.7 391.4 353.1C392.3 352.4 395.6 352.0 400.2 352.2L407.5 352.5L408.7 357.0C409.3 359.5 410.3 362.9 410.9 364.5C412.4 369.0 415.0 378.8 416.4 385.5C417.7 391.7 420.4 398.0 421.9 398.0C423.2 398.0 423.9 385.9 423.5 370.5C423.1 353.2 423.5 352.0 429.3 352.0C431.7 352.0 434.1 352.5 434.8 353.2C436.5 354.9 436.5 441.1 434.8 442.8C433.2 444.4 422.4 444.4 421.3 442.8C420.9 442.1 420.0 439.5 419.3 437.0C418.7 434.5 417.6 430.5 416.9 428.0C416.3 425.5 415.1 421.5 414.3 419.0C413.5 416.5 412.4 412.1 411.9 409.1C411.4 406.2 410.3 402.6 409.6 401.1C408.9 399.7 408.0 396.5 407.6 394.1C406.8 388.7 405.4 386.0 403.5 386.0C401.7 386.0 401.6 386.3 402.0 416.6C402.2 438.0 402.1 440.8 400.5 442.3C398.6 444.3 393.0 444.6 391.2 442.8ZM456.9 441.5C454.9 440.2 452.1 437.1 450.6 434.6L448.0 430.1L448.0 397.2L448.0 364.2L451.2 359.4C453.0 356.7 456.1 353.7 458.0 352.8C462.3 350.6 474.6 350.4 479.3 352.4C486.1 355.2 490.0 363.3 490.0 374.5C490.0 379.5 488.4 381.0 483.1 381.0C479.2 381.0 477.0 377.8 477.0 372.2C477.0 363.8 469.6 360.2 463.9 365.9L461.0 368.8L461.0 396.7C461.0 422.6 461.1 424.7 463.0 427.7C465.2 431.4 469.0 432.8 472.6 431.1C476.0 429.6 477.0 426.2 477.0 416.3C477.0 408.2 476.8 407.6 474.0 404.3C470.9 400.8 470.2 397.3 472.0 393.9C472.9 392.3 474.2 392.0 480.4 392.0C486.0 392.0 488.1 392.4 489.1 393.6C490.1 394.8 490.4 398.8 490.1 410.4C489.7 431.7 488.4 436.4 481.1 441.4C477.8 443.7 476.4 444.0 468.9 444.0C461.6 444.0 460.0 443.7 456.9 441.5ZM505.2 442.8C504.3 441.9 504.0 430.4 504.0 397.3C504.0 356.0 504.1 352.9 505.8 352.2C508.9 350.9 539.8 351.6 541.5 353.0C543.3 354.5 543.5 361.1 541.8 362.8C541.0 363.6 537.1 364.0 530.7 364.0C516.8 364.0 517.0 363.8 517.0 376.5C517.0 389.7 517.9 391.0 527.1 391.0C534.9 391.0 537.0 392.1 537.0 396.3C537.0 401.6 535.4 402.8 527.4 403.2C517.3 403.7 517.0 404.1 517.0 416.9C517.0 431.3 517.0 431.3 530.1 431.8C535.8 432.0 541.1 432.7 541.8 433.2C543.3 434.5 543.4 441.2 541.8 442.8C540.1 444.5 506.9 444.5 505.2 442.8ZM563.7 441.3C561.6 439.8 558.9 437.0 557.7 435.1C555.5 431.6 555.5 430.9 555.5 396.8L555.5 362.2L558.6 358.3C563.0 352.8 567.1 351.0 575.8 351.0C584.6 351.0 588.7 352.6 592.8 357.5C595.4 360.7 596.0 362.4 596.6 368.7C597.5 378.8 596.5 381.0 590.7 381.0C588.3 381.0 585.9 380.5 585.2 379.8C584.5 379.1 584.0 376.2 584.0 373.3C584.0 368.9 583.5 367.4 581.5 365.5C578.4 362.3 574.9 362.3 571.3 365.4L568.5 367.8L568.5 397.5L568.5 427.2L571.4 429.7C573.7 431.6 575.0 432.0 577.4 431.6C582.8 430.5 583.5 429.0 583.8 417.5L584.2 407.0L581.1 404.3C578.7 402.2 578.0 400.7 578.0 398.0C578.0 396.0 578.5 393.9 579.2 393.2C581.0 391.4 594.4 391.6 596.0 393.5C596.9 394.5 597.1 399.9 596.8 413.2C596.5 433.9 595.8 436.1 588.2 441.4C584.8 443.7 583.4 444.0 575.9 444.0C568.4 444.0 567.1 443.7 563.7 441.3ZM611.2 442.8C609.5 441.1 609.5 354.9 611.2 353.2C611.9 352.5 615.3 352.0 619.6 352.0L626.8 352.0L629.0 358.2C630.1 361.7 631.7 367.3 632.5 370.7C633.2 374.1 634.3 377.7 634.8 378.7C635.3 379.7 636.0 382.3 636.3 384.6C637.1 389.3 640.7 398.0 641.9 398.0C642.8 398.0 644.0 374.0 643.7 363.0C643.4 353.3 644.1 352.0 649.3 352.0C651.7 352.0 654.1 352.5 654.8 353.2C656.5 354.9 656.5 441.1 654.8 442.8C653.2 444.4 642.4 444.4 641.3 442.8C640.9 442.1 640.0 439.5 639.3 437.0C638.7 434.5 637.6 430.5 636.9 428.0C636.3 425.5 635.1 421.5 634.3 419.0C633.5 416.5 632.4 412.1 631.9 409.1C631.4 406.2 630.3 402.6 629.6 401.1C628.9 399.7 628.0 396.4 627.6 393.9C626.9 389.3 623.8 384.9 622.2 386.4C621.8 386.8 621.6 399.2 621.8 413.9C622.1 437.7 622.0 440.9 620.5 442.4C618.6 444.3 612.9 444.5 611.2 442.8ZM671.2 442.8C670.3 441.9 670.0 430.6 670.0 397.9C670.0 360.1 670.2 354.1 671.5 353.0C673.6 351.2 705.5 351.1 707.2 352.8C709.0 354.6 708.8 361.9 707.0 363.0C706.2 363.5 701.4 364.0 696.3 364.0C684.2 364.0 684.0 364.2 684.0 377.1C684.0 390.7 684.2 391.0 693.8 391.0C702.7 391.0 704.0 391.8 704.0 397.0C704.0 402.2 702.6 403.0 694.4 403.0C684.3 403.0 684.0 403.4 684.0 417.3C684.0 423.5 684.4 429.1 684.9 429.9C685.6 430.9 688.4 431.3 695.9 431.4C702.6 431.5 706.3 431.9 707.2 432.8C709.0 434.6 708.8 441.9 707.0 443.0C704.7 444.5 672.7 444.3 671.2 442.8ZM723.2 442.8C721.4 441.0 721.5 354.7 723.2 353.2C724.7 352.0 729.8 351.7 743.8 351.9L754.0 352.0L759.0 356.8L764.0 361.6L764.0 375.2L764.0 388.7L760.4 393.5L756.8 398.2L758.9 400.8C763.6 406.8 764.0 408.5 764.7 425.0C765.2 437.2 765.0 441.3 764.0 442.5C762.5 444.3 754.7 444.5 753.2 442.8C752.7 442.1 751.9 435.0 751.5 427.0C751.1 419.0 750.4 411.8 749.9 410.8C748.7 408.6 742.7 405.0 740.2 405.0C736.6 405.0 736.0 408.1 736.0 425.2C736.0 436.6 735.6 442.0 734.8 442.8C733.2 444.4 724.8 444.4 723.2 442.8ZM779.2 442.8C778.3 441.9 778.0 430.6 778.0 397.9C778.0 360.9 778.2 354.1 779.5 353.0C781.4 351.4 790.1 351.5 791.1 353.2C792.5 355.4 792.2 441.4 790.8 442.8C789.2 444.4 780.8 444.4 779.2 442.8ZM804.1 442.6C802.8 441.0 804.1 424.5 805.9 419.8C806.4 418.3 807.2 413.6 807.5 409.3C807.9 405.0 808.8 399.2 809.5 396.5C810.3 393.8 811.3 387.4 811.9 382.5C812.4 377.6 813.6 369.7 814.5 365.0C815.4 360.3 816.3 355.5 816.6 354.4C816.9 352.5 817.8 352.2 824.2 351.8C828.2 351.6 832.5 351.6 833.8 351.8C837.2 352.5 839.0 357.1 840.1 367.8C840.7 373.2 841.8 379.7 842.5 382.4C843.3 385.1 844.0 389.2 844.0 391.4C844.0 393.7 844.7 398.6 845.6 402.5C846.4 406.4 847.7 414.2 848.4 420.0C849.2 425.8 850.3 431.8 850.9 433.3C852.3 437.0 852.3 441.3 850.8 442.8C849.1 444.5 841.4 444.3 839.7 442.5C838.9 441.7 837.7 438.7 837.0 435.8C834.9 427.0 834.9 427.0 826.5 427.0C820.0 427.0 818.9 427.3 817.6 429.2C816.7 430.4 816.0 433.3 816.0 435.5C816.0 441.3 813.8 444.0 809.1 444.0C807.0 444.0 804.7 443.4 804.1 442.6ZM887.2 442.8C886.3 441.9 886.0 430.6 886.0 397.9C886.0 359.7 886.2 354.1 887.6 353.0C889.2 351.6 896.9 351.2 898.8 352.4C899.7 352.9 900.0 363.1 900.0 390.9C900.0 423.4 900.2 428.9 901.5 430.0C902.4 430.7 907.0 431.4 912.7 431.6C918.9 431.9 922.7 432.5 923.2 433.3C924.4 435.2 924.1 441.5 922.8 442.8C921.1 444.5 888.9 444.5 887.2 442.8ZM940.9 440.1C933.3 433.5 933.0 431.3 933.0 389.9C933.0 363.6 933.3 354.1 934.2 353.2C934.9 352.5 937.5 352.0 940.0 352.0C942.5 352.0 945.1 352.5 945.8 353.2C946.7 354.1 947.0 363.2 947.0 388.0C947.0 419.3 947.6 428.0 949.7 430.1C950.2 430.6 952.0 431.2 953.7 431.6C956.4 432.1 957.4 431.7 960.0 429.2L963.0 426.2L963.0 390.8C963.0 363.6 963.3 355.0 964.3 353.6C965.3 352.3 966.7 351.9 970.5 352.2L975.5 352.5L975.8 390.4L976.0 428.3L973.3 433.6C971.6 437.0 969.2 440.0 966.8 441.5C963.5 443.7 962.0 444.0 954.2 444.0L945.3 444.0L940.9 440.1ZM997.8 441.0C994.5 438.8 992.6 436.5 990.9 432.7C988.6 427.7 988.5 426.5 988.2 398.5C987.9 370.3 988.0 369.3 990.2 363.6C994.3 353.2 1000.4 350.1 1014.6 351.3C1022.3 351.9 1026.4 354.6 1029.8 361.2C1031.9 365.6 1032.0 366.6 1032.0 397.4L1032.0 429.1L1029.5 434.0C1025.8 441.3 1020.7 444.0 1010.3 444.0C1003.1 444.0 1001.9 443.7 997.8 441.0ZM1045.2 442.8C1044.3 441.9 1044.0 430.6 1044.0 397.9C1044.0 360.8 1044.2 354.1 1045.5 353.0C1047.3 351.5 1060.6 351.2 1062.1 352.7C1062.6 353.2 1063.7 356.1 1064.5 359.1C1066.9 368.3 1068.2 373.3 1070.0 380.0C1071.0 383.6 1072.3 388.3 1072.9 390.6C1073.5 392.8 1074.8 395.4 1075.9 396.4C1077.7 398.0 1077.8 397.9 1078.4 393.8C1078.8 391.4 1079.0 381.6 1078.9 371.9C1078.8 362.2 1079.0 353.8 1079.4 353.1C1080.3 351.6 1087.3 351.7 1088.8 353.2C1090.5 354.9 1090.5 441.1 1088.8 442.8C1087.5 444.1 1079.2 444.4 1077.4 443.2C1076.1 442.3 1073.1 434.4 1071.4 427.2C1068.7 415.7 1066.8 408.4 1065.5 405.0C1064.7 403.1 1063.9 399.5 1063.5 397.2C1062.9 392.4 1059.5 385.0 1058.0 385.0C1056.9 385.0 1056.8 390.1 1056.9 419.7C1056.9 430.3 1056.6 440.0 1056.0 441.4C1055.2 443.6 1054.4 444.0 1050.7 444.0C1048.3 444.0 1045.9 443.5 1045.2 442.8ZM1112.8 441.5C1110.7 440.1 1107.9 437.0 1106.5 434.6L1104.0 430.3L1104.0 397.4L1104.0 364.4L1106.9 359.8C1108.6 357.2 1111.0 354.4 1112.5 353.4C1115.4 351.5 1126.8 350.4 1132.4 351.4C1140.4 352.9 1145.7 361.3 1146.2 373.2C1146.4 379.1 1144.8 381.0 1140.0 381.0C1135.2 381.0 1133.8 379.3 1132.9 372.2C1131.6 363.0 1125.7 360.1 1119.9 365.9L1117.0 368.8L1117.0 396.7C1117.0 422.6 1117.1 424.7 1119.0 427.7C1121.2 431.4 1125.0 432.8 1128.6 431.1C1132.0 429.6 1133.0 426.2 1133.0 416.3C1133.0 408.2 1132.8 407.6 1130.0 404.3C1126.9 400.8 1126.2 397.3 1128.0 393.9C1128.9 392.3 1130.2 392.0 1136.4 392.0C1141.8 392.0 1144.1 392.4 1145.0 393.5C1146.8 395.6 1147.0 416.3 1145.4 426.1C1144.0 434.8 1142.5 437.7 1137.1 441.4C1133.8 443.7 1132.4 444.0 1124.9 444.0C1117.5 444.0 1116.0 443.7 1112.8 441.5ZM1168.5 441.5C1166.3 440.2 1163.4 437.4 1162.0 435.4L1159.5 431.6L1159.5 397.6C1159.5 363.7 1159.5 363.5 1161.8 359.8C1165.4 354.1 1169.2 351.8 1176.5 351.3C1186.8 350.4 1191.6 351.6 1196.0 356.0C1201.5 361.5 1202.3 367.1 1201.8 401.5C1201.5 433.4 1201.2 434.7 1193.2 440.7C1189.1 443.8 1188.4 444.0 1180.7 444.0C1173.8 444.0 1171.9 443.6 1168.5 441.5ZM222.5 430.6C224.3 429.8 226.3 428.3 226.9 427.2C227.6 425.8 228.0 415.2 228.0 397.0L228.0 368.9L225.5 366.5C222.3 363.2 214.6 362.9 213.0 365.9C212.4 367.1 212.0 379.3 212.0 398.4C212.0 428.8 212.0 428.9 214.2 430.4C217.0 432.4 218.1 432.4 222.5 430.6ZM307.6 430.5C311.8 427.6 312.1 424.8 311.8 395.8C311.5 370.8 311.3 368.0 309.7 366.2C308.7 365.1 306.8 363.9 305.5 363.6C302.9 362.9 298.0 364.5 296.8 366.3C296.4 367.0 296.0 380.9 296.0 397.3L296.0 427.1L298.5 429.5C301.2 432.3 304.6 432.7 307.6 430.5ZM1014.1 431.0C1018.6 428.5 1019.0 425.7 1019.0 397.3C1019.0 372.6 1018.8 370.3 1017.1 367.3C1013.8 362.0 1007.6 361.7 1004.3 366.7C1002.7 369.1 1002.5 372.6 1002.2 394.0C1001.8 420.8 1002.6 427.9 1006.3 430.5C1008.8 432.3 1011.4 432.4 1014.1 431.0ZM1186.2 428.9C1187.8 427.0 1188.0 423.9 1188.0 397.3L1188.0 367.9L1185.4 365.3C1183.4 363.3 1182.3 362.9 1179.7 363.4C1177.9 363.8 1175.6 365.0 1174.5 366.1C1172.6 368.0 1172.5 369.4 1172.5 397.6L1172.5 427.2L1175.4 429.7C1178.9 432.6 1183.4 432.3 1186.2 428.9ZM831.9 413.7C834.0 411.1 829.4 378.0 826.5 375.2C825.4 374.1 824.0 377.3 824.0 381.0C824.0 382.9 823.3 387.0 822.5 390.0C820.3 398.2 819.4 411.6 821.0 413.5C822.6 415.4 830.3 415.5 831.9 413.7ZM744.8 391.9C749.7 390.2 751.0 387.2 751.0 377.7C751.0 370.2 750.7 369.0 748.5 366.6C746.8 364.8 745.1 364.0 742.6 364.0C736.7 364.0 736.0 365.6 736.0 378.5C736.0 392.8 737.2 394.6 744.8 391.9ZM17.2 307.8C15.6 306.2 15.6 297.8 17.2 296.2C18.1 295.3 153.3 295.0 619.6 295.0L1220.9 295.0L1222.4 297.2C1223.3 298.4 1224.0 300.6 1224.0 302.0C1224.0 303.4 1223.3 305.6 1222.4 306.8L1220.9 309.0L619.6 309.0C153.3 309.0 18.1 308.7 17.2 307.8ZM432.1 284.3C425.2 283.6 415.3 275.7 410.2 266.7C405.9 259.2 407.9 247.3 414.7 239.5C419.2 234.3 429.0 229.8 429.0 232.9C429.0 233.4 426.5 236.2 423.4 239.1C416.3 245.9 412.8 252.7 413.2 258.9C413.4 262.5 413.9 263.6 415.4 263.8C417.8 264.3 420.0 261.5 420.0 258.1C420.0 254.6 425.1 246.8 429.3 243.6C433.6 240.3 446.1 236.0 451.4 236.0C456.6 236.0 457.7 235.2 458.2 231.5L458.5 228.5L630.5 228.2L802.6 228.0L810.6 230.3C824.5 234.4 831.9 242.6 832.8 254.9C833.0 258.8 832.8 263.2 832.1 265.3C830.5 270.0 824.2 277.0 817.8 281.1L812.5 284.5L624.5 284.6C521.1 284.6 434.5 284.5 432.1 284.3ZM456.0 218.1C454.5 215.2 455.9 190.0 458.1 180.4C459.1 175.9 460.0 171.5 460.0 170.6C460.0 164.6 472.7 134.6 480.9 120.9C487.7 109.7 499.4 94.8 507.7 86.9C519.0 76.1 535.4 64.3 548.2 57.9C551.7 56.2 555.6 54.3 557.0 53.6C561.8 51.1 569.0 49.6 570.2 50.8C572.2 52.8 569.1 58.0 564.6 60.1C557.9 63.1 545.8 69.9 541.5 73.1C539.3 74.7 534.6 78.2 531.0 80.9C522.2 87.5 506.9 103.1 502.0 110.7C499.8 114.1 497.6 117.1 497.0 117.5C495.6 118.4 488.9 130.0 488.0 133.2C487.5 134.9 487.6 136.5 488.4 137.6C490.4 140.2 493.3 138.0 497.3 130.8C503.7 119.4 510.6 110.6 522.6 98.7C534.7 86.5 544.5 79.1 557.5 72.0C565.6 67.6 568.4 67.1 569.9 69.9C570.6 71.1 571.0 97.9 571.0 144.6C571.0 184.7 571.0 218.1 571.0 218.8C571.0 219.7 558.9 220.0 514.0 220.0C458.8 220.0 457.0 219.9 456.0 218.1ZM580.0 218.0C579.3 216.7 579.0 188.5 579.2 128.3L579.5 40.5L582.7 34.4C588.5 23.2 600.7 16.0 613.8 16.0C620.3 16.0 622.2 16.5 628.4 19.4C637.0 23.6 638.3 24.7 644.0 33.5L648.5 40.4L648.8 127.5C649.0 185.1 648.7 215.5 648.1 217.3L647.0 220.0L614.1 220.0C582.2 220.0 581.0 219.9 580.0 218.0ZM656.5 218.8C656.2 218.1 656.1 179.2 656.2 132.5L656.5 47.5L662.0 47.7C667.8 48.0 671.2 49.2 688.0 57.2C708.8 67.1 727.4 81.8 743.7 101.2C753.9 113.4 764.8 131.4 769.8 144.5C771.1 147.8 773.0 152.5 773.9 155.0C776.5 161.3 779.0 171.3 780.1 179.5C780.6 183.3 781.7 189.4 782.5 193.0C783.5 197.2 784.0 203.0 783.8 209.5L783.5 219.5L720.2 219.8C670.1 220.0 656.8 219.8 656.5 218.8Z"/></symbol></svg>
+<div class="righello"><span id="progress"></span></div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#home" class="logo" aria-label="Studio Ingegneria Luongo"><svg class="logo-svg" role="img" aria-label="Studio Ingegneria Luongo"><use href="#logo-luongo"/></svg></a>
+    <nav class="menu" id="menu">
+      <a href="#studio">Lo Studio</a>
+      <a href="#servizi">Servizi</a>
+      <a href="#metodo">Metodo</a>
+      <a href="#progetti">Progetti</a>
+      <a href="#team">Team</a>
+      <a href="#aggiornamenti">Notizie</a>
+      <a href="https://learning2.esafad.it/login" target="_blank" rel="noopener" class="nav-fad"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Area corsisti</a>
+      <a href="#contatti" class="btn">Richiedi consulenza</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Apri menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="griglia"></div>
+  <div class="wrap">
+    <div>
+      <div class="hero-tag mono">San Giuseppe Vesuviano · Napoli</div>
+      <h1 class="rv in">Ingegneria<br>per la <span class="acc">sicurezza</span><br><em>delle persone.</em></h1>
+      <p class="lead">Consulenza tecnica per la sicurezza sul lavoro, progettazione e formazione professionale. Un team multidisciplinare di ingegneri e tecnici specializzati, al fianco delle imprese con soluzioni su misura e conformi alla normativa.</p>
+      <div class="hero-cta">
+        <a href="#contatti" class="btn">Parla con un tecnico
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>
+        <a href="#servizi" class="btn btn-ghost">Scopri i servizi</a>
+      </div>
+    </div>
+    <div class="disegno" aria-hidden="true">
+      <svg viewBox="0 0 500 500" fill="none" stroke-linecap="square" stroke-linejoin="round">
+        <defs>
+          <pattern id="pannello" width="14" height="14" patternUnits="userSpaceOnUse">
+            <rect width="14" height="14" fill="#E8622C"/><path d="M0 14L14 0" stroke="#B9461A" stroke-width="1.2"/>
+          </pattern>
+        </defs>
+        <!-- terreno e plinto -->
+        <path class="tratto" d="M20 440H480" stroke="#fff" stroke-width="2.5"/>
+        <path class="tratto" d="M150 440V426H230V440" stroke="#fff" stroke-width="2"/>
+        <!-- torre (traliccio) -->
+        <path class="tratto" d="M175 426V132M205 426V132" stroke="#fff" stroke-width="2.4"/>
+        <path class="tratto t2" d="M175 440L205 412M175 412H205M175 412L205 384M175 384H205M175 384L205 356M175 356H205M175 356L205 328M175 328H205M175 328L205 300M175 300H205M175 300L205 272M175 272H205M175 272L205 244M175 244H205M175 244L205 216M175 216H205M175 216L205 188M175 188H205M175 188L205 160M175 160H205M175 160L205 150M175 150H205" stroke="rgba(255,255,255,.6)" stroke-width="1.2"/>
+        <!-- cuspide e tiranti -->
+        <path class="tratto t2" d="M175 118L190 62L205 118M178 104H202M182 88H198M186 74H194" stroke="#fff" stroke-width="1.8"/>
+        <path class="tratto t3" d="M190 62L380 118M190 62L68 120" stroke="rgba(255,255,255,.75)" stroke-width="1.2"/>
+        <!-- braccio -->
+        <path class="tratto" d="M175 118H468V132H175" stroke="#fff" stroke-width="2.2"/>
+        <path class="tratto t2" d="M205 132L218 118L231 132L244 118L257 132L270 118L283 132L296 118L309 132L322 118L335 132L348 118L361 132L374 118L387 132L400 118L413 132L426 118L439 132L452 118L465 132" stroke="rgba(255,255,255,.6)" stroke-width="1.1"/>
+        <path class="tratto t2" d="M468 118L478 125L468 132" stroke="#fff" stroke-width="1.6"/>
+        <!-- controbraccio e zavorre -->
+        <path class="tratto" d="M175 120H62V132H175" stroke="#fff" stroke-width="2.2"/>
+        <path class="tratto t2" d="M175 132L162 120L149 132L136 120L123 132L110 120L97 132L84 120L71 132L58 120" stroke="rgba(255,255,255,.6)" stroke-width="1.1"/>
+        <path class="tetto" d="M66 134h14v34H66zM82 134h14v34H82zM98 134h14v34H98z" fill="url(#pannello)"/>
+        <path class="tratto t3" d="M66 134h14v34H66zM82 134h14v34H82zM98 134h14v34H98z" stroke="#fff" stroke-width="1.4"/>
+        <!-- cabina -->
+        <g class="tratto t3" stroke="#fff" stroke-width="1.6"><path d="M205 134H232V160H205"/><path d="M210 139H227V150H210z"/></g>
+        <!-- carrello, fune, gancio e carico sospeso -->
+        <g class="gancio">
+          <path class="tratto t3" d="M372 132h20v8h-20z" stroke="#fff" stroke-width="1.6"/>
+          <g class="pendolo">
+            <path class="tratto t4" d="M378 140V300M386 140V300" stroke="#fff" stroke-width="1.2"/>
+            <path class="tratto t4" d="M374 300h16v10h-16zM382 310v8a7 7 0 1 1-7 7" stroke="#fff" stroke-width="1.8"/>
+            <path class="tratto t4" d="M382 318L328 352M382 318L436 352" stroke="#fff" stroke-width="1.3"/>
+            <path class="tetto t-del" d="M318 352H446V388H318Z" fill="url(#pannello)"/>
+            <path class="tratto t4" d="M318 352H446V388H318ZM318 362H446" stroke="#fff" stroke-width="1.8"/>
+          </g>
+        </g>
+        <!-- quote -->
+        <g class="quota" stroke="#E8622C" stroke-width="1">
+          <path d="M190 36H468M190 28v16M468 28v16"/>
+          <path d="M34 62V440M26 62h16M26 440h16"/>
+          <circle cx="190" cy="62" r="4.5"/>
+        </g>
+        <g class="quota" fill="#E8622C" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">
+          <text x="270" y="24">SBRACCIO 50.00 m</text>
+          <text x="20" y="260" transform="rotate(-90 20 260)">H 42.00 m</text>
+          <text x="250" y="468" fill="rgba(255,255,255,.55)">TAV. 01 — GRU A TORRE</text>
+          <text x="400" y="410" fill="rgba(255,255,255,.55)">Q = 2.5 t</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="wrap mono">
+      <span>D.Lgs. 81/08 · Prevenzione incendi · ISO 45001</span>
+      <span>Lun–Ven · 09–13 / 15–19</span>
+      <span class="scroll-hint">Scorri <i></i></span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NASTRO ================= -->
+<div class="nastro" aria-hidden="true">
+  <div class="nastro-track">
+    <span>RSPP</span><span>CSP / CSE</span><span>Prevenzione Incendi</span><span>Formazione</span><span>HACCP</span><span>Gas Radon</span><span>Acustica</span><span>ISO 9001 · ISO 45001</span><span>Industria 4.0</span><span>Certificazioni Energetiche</span>
+    <span>RSPP</span><span>CSP / CSE</span><span>Prevenzione Incendi</span><span>Formazione</span><span>HACCP</span><span>Gas Radon</span><span>Acustica</span><span>ISO 9001 · ISO 45001</span><span>Industria 4.0</span><span>Certificazioni Energetiche</span>
+  </div>
+</div>
+
+<!-- ================= STUDIO ================= -->
+<section class="sez" id="studio">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">01 — Lo Studio</div>
+      <h2 class="rv d1">Cambiamo la nostra comunità, un luogo di lavoro alla volta.</h2>
+    </div>
+    <div class="studio-grid">
+      <div></div>
+      <div class="testo rv">Lo Studio Ingegneria Luongo opera nella <b>consulenza tecnica per la sicurezza</b> sul lavoro, nella consulenza aziendale e nella <b>formazione professionale</b>.</div>
+      <div class="side rv d1">
+        <p>Siamo un team multidisciplinare di ingegneri e tecnici specializzati. Affianchiamo aziende manifatturiere, attività commerciali, imprese edili e realtà del settore alimentare in ogni fase: dall'analisi dei rischi alla progettazione, fino alla formazione del personale.</p>
+        <p>Ogni intervento è costruito sulla realtà specifica del cliente, con un obiettivo preciso: ambienti di lavoro più sicuri e pienamente conformi alla normativa vigente.</p>
+      </div>
+    </div>
+    <div class="numeri">
+      <div class="numero rv"><b data-n="16">0</b><span class="mono">Servizi specialistici</span></div>
+      <div class="numero rv d1"><b data-n="8">0</b><span class="mono">Abilitazioni professionali</span></div>
+      <div class="numero rv d2"><b data-n="2">0</b><span class="mono">Norme ISO · Auditor</span></div>
+      <div class="numero rv d3"><b data-n="1">0</b><span class="mono">Interlocutore unico</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVIZI ================= -->
+<section class="sez servizi" id="servizi">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">02 — Servizi</div>
+      <div>
+        <h2 class="rv d1">Tutto ciò che serve alla tua azienda, sotto lo stesso tetto.</h2>
+        <p class="rv d2">Sedici servizi integrati per sicurezza, cantieri, progettazione e qualità. Filtra per area di interesse.</p>
+      </div>
+    </div>
+
+    <div class="filtri rv" id="filtri">
+      <button class="on" data-f="tutti">Tutti</button>
+      <button data-f="sic">Sicurezza lavoro</button>
+      <button data-f="can">Cantieri</button>
+      <button data-f="prog">Progettazione &amp; energia</button>
+      <button data-f="ver">Verifiche &amp; diagnosi</button>
+      <button data-f="qual">Qualità &amp; conformità</button>
+    </div>
+
+    <div class="serv-grid" id="servGrid"></div>
+  </div>
+</section>
+
+<!-- ================= METODO ================= -->
+<section class="sez" id="metodo">
+  <div class="wrap metodo-wrap">
+    <div class="metodo-sticky">
+      <div>
+        <div class="sez-num mono" style="display:inline-block;margin-bottom:28px;padding-right:40px">03 — Metodo</div>
+        <h2>Un processo chiaro, dall'analisi alla formazione.</h2>
+      </div>
+      <div class="contatore"><span id="passoN">01</span><small>/ 04</small></div>
+    </div>
+    <div class="passi">
+      <div class="passo att" data-p="01">
+        <span class="mono">Fase 01</span>
+        <h3>Sopralluogo e analisi</h3>
+        <p>Visitiamo la tua sede o il tuo cantiere, raccogliamo la documentazione esistente e individuiamo lacune, rischi e priorità d'intervento.</p>
+      </div>
+      <div class="passo" data-p="02">
+        <span class="mono">Fase 02</span>
+        <h3>Valutazione e progetto</h3>
+        <p>Redigiamo valutazioni dei rischi, piani di sicurezza, progetti antincendio e impiantistici con rigore tecnico e piena aderenza alla normativa.</p>
+      </div>
+      <div class="passo" data-p="03">
+        <span class="mono">Fase 03</span>
+        <h3>Attuazione e formazione</h3>
+        <p>Accompagniamo l'azienda nell'attuazione delle misure e formiamo lavoratori, preposti e dirigenti, in aula o in modalità FAD.</p>
+      </div>
+      <div class="passo" data-p="04">
+        <span class="mono">Fase 04</span>
+        <h3>Monitoraggio continuo</h3>
+        <p>Teniamo sotto controllo scadenze, aggiornamenti normativi e verifiche periodiche, così la conformità resta un risultato stabile nel tempo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABILITAZIONI ================= -->
+<section class="sez abil" id="abilitazioni">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">04 — Competenze</div>
+      <h2 class="rv d1">Professionisti abilitati, competenze certificate.</h2>
+    </div>
+    <div class="abil-list">
+      <div class="abil-row rv"><span class="mono">A.01</span><h3>Professionisti antincendio</h3><span class="badge">Elenco Min. Interno</span></div>
+      <div class="abil-row rv"><span class="mono">A.02</span><h3>Coordinatori sicurezza CSP / CSE</h3><span class="badge">Titolo IV D.Lgs. 81/08</span></div>
+      <div class="abil-row rv"><span class="mono">A.03</span><h3>Responsabili SPP — RSPP</h3><span class="badge">Art. 32 D.Lgs. 81/08</span></div>
+      <div class="abil-row rv"><span class="mono">A.04</span><h3>Formatori salute e sicurezza</h3><span class="badge">Luoghi di lavoro</span></div>
+      <div class="abil-row rv"><span class="mono">A.05</span><h3>Esperti in risanamento gas radon</h3><span class="badge">Radon</span></div>
+      <div class="abil-row rv"><span class="mono">A.06</span><h3>Tecnici competenti in acustica</h3><span class="badge">Elenco Nazionale</span></div>
+      <div class="abil-row rv"><span class="mono">A.07</span><h3>Auditor / Lead Auditor ISO</h3><span class="badge">ISO 9001 · ISO 45001</span></div>
+      <div class="abil-row rv"><span class="mono">A.08</span><h3>Tecnici in rilievi architettonici</h3><span class="badge">Rilievo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROGETTI ================= -->
+<section class="sez" id="progetti" style="padding-bottom:210px">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">05 — Progetti</div>
+      <div>
+        <h2 class="rv d1">Aziende che si affidano a noi.</h2>
+        <p class="rv d2">Alcune delle realtà del territorio con cui collaboriamo su sicurezza, prevenzione e conformità.</p>
+      </div>
+    </div>
+    <div class="prog-grid">
+      <button type="button" class="prog p1 rv" data-p="0">
+        <svg class="fondo" viewBox="0 0 400 275" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(255,255,255,.18)" fill="none"><circle cx="320" cy="60" r="120"/><circle cx="320" cy="60" r="80"/><circle cx="320" cy="60" r="40"/></g></svg>
+        <div class="prog-top mono"><span>P.01</span><span>Nola (NA) · CIS</span></div>
+        <div><h3>Gi.Ma. Profumi</h3><div class="settore mono">Impianti tecnologici · Antincendio</div><span class="apri mono">Vedi il progetto +</span></div>
+      </button>
+      <button type="button" class="prog p2 rv d1" data-p="1">
+        <svg class="fondo" viewBox="0 0 400 275" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(255,255,255,.18)"><path d="M0 40h400M0 80h400M0 120h400M0 160h400M0 200h400M0 240h400"/><path d="M60 0v275M140 0v275M220 0v275M300 0v275"/></g></svg>
+        <div class="prog-top mono"><span>P.02</span><span>San Giuseppe Vesuviano (NA)</span></div>
+        <div><h3>Manifattura Tessile Campana</h3><div class="settore mono">Impianti · Direzione lavori</div><span class="apri mono">Vedi il progetto +</span></div>
+      </button>
+      <button type="button" class="prog p3 rv" data-p="2">
+        <svg class="fondo" viewBox="0 0 400 275" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(255,255,255,.18)" fill="none"><path d="M0 275L200 40 400 275"/><path d="M60 275L200 110 340 275"/><path d="M120 275L200 180 280 275"/></g></svg>
+        <div class="prog-top mono"><span>P.03</span><span>Striano (NA)</span></div>
+        <div><h3>Mira Group</h3><div class="settore mono">Impianti · Coordinamento lavori</div><span class="apri mono">Vedi il progetto +</span></div>
+      </button>
+      <button type="button" class="prog p4 rv d1" data-p="3">
+        <svg class="fondo" viewBox="0 0 400 275" preserveAspectRatio="xMidYMid slice"><g stroke="rgba(255,255,255,.18)" fill="none"><rect x="60" y="50" width="280" height="175"/><path d="M200 50v175"/><circle cx="200" cy="137" r="36"/></g></svg>
+        <div class="prog-top mono"><span>P.04</span><span>Cercola (NA)</span></div>
+        <div><h3>Centro Sportivo Caravita</h3><div class="settore mono">Progettazione antincendio</div><span class="apri mono">Vedi il progetto +</span></div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section class="sez team" id="team">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">06 — Il Team</div>
+      <div>
+        <h2 class="rv d1">Le persone dietro ogni progetto.</h2>
+        <p class="rv d2">Quattro ingegneri con competenze complementari: sicurezza, edilizia, strutture e ambiente.</p>
+      </div>
+    </div>
+    <div class="team-grid">
+      <article class="tm rv"><div class="tm-foto"><span class="tm-cod mono">T.01</span><img src="img/gennaro-luongo.jpg" alt="Ing. Gennaro Luongo" loading="lazy"></div>
+        <div class="tm-info"><h3><small>ING.</small>Gennaro Luongo</h3><p>Ingegnere elettronico e della sicurezza</p></div></article>
+      <article class="tm rv d1"><div class="tm-foto"><span class="tm-cod mono">T.02</span><img src="img/carmine-luongo.jpg" alt="Ing. Carmine Luongo" loading="lazy"></div>
+        <div class="tm-info"><h3><small>ING.</small>Carmine Luongo</h3><p>Ingegnere edile</p></div></article>
+      <article class="tm rv d2"><div class="tm-foto"><span class="tm-cod mono">T.03</span><img src="img/alfonso-giorgio.jpg" alt="Ing. Alfonso Giorgio" loading="lazy"></div>
+        <div class="tm-info"><h3><small>ING.</small>Alfonso Giorgio</h3><p>Ingegnere civile</p></div></article>
+      <article class="tm rv d3"><div class="tm-foto"><span class="tm-cod mono">T.04</span><img src="img/michele-stora.jpg" alt="Ing. Michele Stora" loading="lazy"></div>
+        <div class="tm-info"><h3><small>ING.</small>Michele Stora</h3><p>Ingegnere civile e ambientale</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OSSERVATORIO ================= -->
+<section class="sez oss" id="aggiornamenti">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">07 — Osservatorio</div>
+      <div>
+        <h2 class="rv d1">Normativa e notizie, sempre aggiornate.</h2>
+        <p class="rv d2">Le novità su sicurezza, cantieri, antincendio e formazione, raccolte solo da fonti istituzionali e testate di settore riconosciute. Ogni notizia rimanda all'articolo originale.</p>
+      </div>
+    </div>
+
+    <div class="oss-bar rv">
+      <div class="temi" id="temi">
+        <button class="on" data-t="tutti">Tutti</button>
+        <button data-t="DVR e rischi">DVR e rischi</button>
+        <button data-t="Cantieri">Cantieri</button>
+        <button data-t="Antincendio">Antincendio</button>
+        <button data-t="Formazione">Formazione</button>
+        <button data-t="Dati e istituzioni">Dati e istituzioni</button>
+      </div>
+      <div class="stato mono" id="stato"><i></i><span>Selezione del 12/11/2026</span></div>
+    </div>
+
+    <div class="news-grid" id="newsGrid"></div>
+    <p class="oss-nota">I contenuti appartengono alle rispettive fonti: lo Studio ne riporta titolo e link all'originale a scopo informativo.</p>
+
+    <div class="fonti-head">
+      <h3 class="rv">Fonti ufficiali di riferimento</h3>
+      <span class="mono rv" style="color:var(--acciaio)">Link diretti ai portali</span>
+    </div>
+    <div class="fonti-grid" id="fontiGrid"></div>
+  </div>
+</section>
+
+<!-- ================= FAD ================= -->
+<section class="fad">
+  <div class="wrap">
+    <div class="rv">
+      <span class="mono" style="opacity:.8">Formazione a distanza</span>
+      <h2>Sei un corsista? Accedi alla piattaforma FAD.</h2>
+      <p>Segui i corsi di formazione sulla sicurezza dove e quando vuoi, con attestato finale riconosciuto.</p>
+    </div>
+    <a class="btn rv d1" href="https://learning2.esafad.it/login" target="_blank" rel="noopener">Area corsisti
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5 4h7v7" stroke="currentColor" stroke-width="1.8"/></svg></a>
+  </div>
+</section>
+
+<!-- ================= CONTATTI ================= -->
+<section class="sez contatti" id="contatti">
+  <div class="wrap">
+    <div class="sez-head">
+      <div class="sez-num mono rv">08 — Contatti</div>
+      <div>
+        <h2 class="rv d1">Raccontaci la tua azienda. Al resto pensiamo noi.</h2>
+        <p class="rv d2">Un primo confronto senza impegno per capire di cosa hai bisogno.</p>
+      </div>
+    </div>
+    <div class="cont-grid">
+      <div class="rv">
+        <div class="info-blk"><span class="mono">Sede</span><div>Via Passanti, 354<br>80047 San Giuseppe Vesuviano (NA)</div></div>
+        <div class="info-blk"><span class="mono">Telefono</span><div><a href="tel:+390812597443">+39 081 259 7443</a></div></div>
+        <div class="info-blk"><span class="mono">Email</span><div><a href="mailto:info@studioingegnerialuongo.com">info@studioingegnerialuongo.com</a></div></div>
+        <div class="info-blk"><span class="mono">Orari</span><div>Lun – Ven · 09:00–13:00 / 15:00–19:00</div></div>
+      </div>
+      <form id="form" class="rv d1" novalidate>
+        <div class="campo"><label for="nome">Nome e cognome</label><input id="nome" required></div>
+        <div class="campo"><label for="azienda">Azienda</label><input id="azienda"></div>
+        <div class="campo"><label for="email">Email</label><input id="email" type="email" required></div>
+        <div class="campo"><label for="tel">Telefono</label><input id="tel" type="tel"></div>
+        <div class="campo full"><label for="servizio">Servizio di interesse</label><select id="servizio"><option>Seleziona un servizio</option></select></div>
+        <div class="campo full"><label for="msg">Messaggio</label><textarea id="msg" placeholder="Settore, numero di dipendenti, esigenza…"></textarea></div>
+        <label class="privacy"><input type="checkbox" id="priv" required> Acconsento al trattamento dei dati personali ai sensi del Regolamento UE 2016/679 (GDPR).</label>
+        <button class="btn" type="submit">Invia richiesta
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button>
+        <div class="esito" id="esito" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-big">STUDIO LUONGO</div>
+    <div class="foot-grid">
+      <div>
+        <a href="#home" class="logo" style="color:#fff;margin-bottom:22px"><svg class="logo-svg logo-foot" role="img" aria-label="Studio Ingegneria Luongo"><use href="#logo-luongo"/></svg></a>
+        <p style="font-size:14px;max-width:320px">Consulenza tecnica per la sicurezza sul lavoro, consulenza aziendale e formazione professionale.</p>
+        <div class="social">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8V6c0-.9.6-1 1-1h3V1h-4c-4 0-5 3-5 5v2H6v4h3v11h5V12h3.5l.5-4z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Studio</h4><a href="#studio">Chi siamo</a><a href="#metodo">Metodo</a><a href="#abilitazioni">Competenze</a><a href="#progetti">Progetti</a><a href="#team">Team</a><a href="#aggiornamenti">Notizie e normativa</a></div>
+      <div><h4>Servizi</h4><a href="#servizi">RSPP</a><a href="#servizi">CSP / CSE</a><a href="#servizi">Prevenzione incendi</a><a href="#servizi">Formazione</a></div>
+      <div><h4>Contatti</h4><a href="tel:+390812597443">+39 081 259 7443</a><a href="mailto:info@studioingegnerialuongo.com">info@studioingegnerialuongo.com</a><a href="https://learning2.esafad.it/login" target="_blank" rel="noopener">Area corsisti FAD</a></div>
+    </div>
+    <div class="foot-bot mono"><span>© 2026 Studio Ingegneria Luongo · Tutti i diritti riservati</span><span>Privacy · Cookie</span></div>
+  </div>
+</footer>
+
+<div class="dlg" id="dlg" aria-hidden="true">
+  <div class="dlg-bg" data-close></div>
+  <div class="dlg-panel" role="dialog" aria-modal="true" aria-labelledby="dlgTitle" tabindex="-1">
+    <div class="dlg-top">
+      <button class="dlg-x" data-close aria-label="Chiudi"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.8"/></svg></button>
+      <span class="dlg-cod mono" id="dlgCod"></span>
+      <svg class="dlg-ico" id="dlgIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></svg>
+      <h2 id="dlgTitle"></h2>
+      <p class="dlg-sub" id="dlgSub"></p>
+    </div>
+    <div class="dlg-body" id="dlgBody"></div>
+  </div>
+</div>
+<script>
+/* ---------- Dati servizi ---------- */
+const I = { // icone a linea
+  helmet:'<path d="M4 17h16M6 17v-3a6 6 0 0 1 12 0v3M12 5v3M9 8.5l-1-2M15 8.5l1-2"/>',
+  crane:'<path d="M5 21V4h2v17M3 21h8M7 4l13 3M7 7h13M17 7v5M15 12h4v3h-4z"/>',
+  doc:'<path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/>',
+  shield:'<path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  fire:'<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4 2-7 1 1 2 2 2 3 1-2 1-4 1-6z"/>',
+  food:'<path d="M4 11h16a8 8 0 0 1-16 0zM8 7c0-2 2-2 2-4M12 7c0-2 2-2 2-4"/>',
+  people:'<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 20c0-3 2-5 5-5s5 2 5 5M11 20c0-3 2-5 5-5s5 2 5 5"/>',
+  cone:'<path d="M9 4h6l4 16H5zM7 12h10M8 8h8M3 20h18"/>',
+  lock:'<rect x="5" y="10" width="14" height="11" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/>',
+  plug:'<path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/>',
+  ruler:'<path d="M3 17L17 3l4 4L7 21zM7 13l2 2M10 10l2 2M13 7l2 2"/>',
+  leaf:'<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15M5 19l7-7"/>',
+  chip:'<rect x="7" y="7" width="10" height="10"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>',
+  scan:'<path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5M7 12h10"/>',
+  hook:'<path d="M12 2v8M9 2h6M12 10a4 4 0 1 1-4 4"/>',
+  radon:'<circle cx="12" cy="12" r="2"/><path d="M12 10V3a9 9 0 0 1 7.8 4.5L13.7 11M10.3 13l-6.1 3.5A9 9 0 0 0 12 21v-7M13.7 13l6.1 3.5"/>'
+};
+const S = [
+ {c:'sic',t:'Assunzione incarico RSPP',b:'Assumiamo l\'incarico di RSPP esterno, garantendo presidio e continuità.',i:'helmet',
+  intro:'La nomina del Responsabile del Servizio di Prevenzione e Protezione è uno degli obblighi non delegabili del Datore di Lavoro. Chi ricopre il ruolo deve possedere capacità e requisiti adeguati ai rischi presenti in azienda.',
+  fa:'I nostri ingegneri, qualificati in salute e sicurezza sul lavoro, assumono l\'incarico di RSPP e collaborano con Datore di Lavoro, Medico competente e RLS.',
+  att:['Definizione, pianificazione e coordinamento degli interventi di prevenzione e protezione','Redazione, aggiornamento e manutenzione del DVR','Informazione e aggiornamento del personale','Programmazione della formazione dei lavoratori','Organizzazione e gestione della riunione periodica'],
+  norme:['D.Lgs. 81/08, art. 17','D.Lgs. 81/08, art. 32']},
+ {c:'can',t:'Incarico CSP / CSE',b:'Coordinamento della sicurezza in fase di progettazione ed esecuzione dei lavori.',i:'crane',
+  intro:'Quando in cantiere operano più imprese esecutrici, anche non contemporaneamente, il Committente o il Responsabile dei Lavori deve nominare il Coordinatore per la Sicurezza in fase di Progettazione (CSP) e di Esecuzione (CSE).',
+  fa:'I nostri ingegneri possiedono i requisiti di formazione ed esperienza per assumere entrambi gli incarichi, dalla redazione dei piani fino al controllo quotidiano in cantiere.',
+  att:['CSP: redazione del Piano di Sicurezza e Coordinamento (PSC)','CSP: predisposizione del Fascicolo dell\'Opera','CSE: verifica dell\'applicazione del PSC e dell\'idoneità dei POS','CSE: aggiornamento di PSC e Fascicolo in base all\'andamento dei lavori','CSE: coordinamento tra imprese, lavoratori autonomi e RLS','CSE: segnalazione delle inosservanze e sospensione delle lavorazioni in caso di pericolo grave e imminente'],
+  norme:['D.Lgs. 81/08, artt. 90, 91, 92, 98','Titolo IV D.Lgs. 81/08']},
+ {c:'sic',t:'Valutazione rischi specifici',b:'Rumore, vibrazioni, chimico, MMC, stress lavoro-correlato e tutti i rischi previsti dalla norma.',i:'doc',
+  intro:'Il Datore di Lavoro è tenuto a valutare tutti i rischi per la salute e la sicurezza dei lavoratori, compresi quelli specifici legati ad agenti fisici, chimici, biologici e all\'organizzazione del lavoro.',
+  fa:'Eseguiamo rilievi strumentali e valutazioni documentate per ogni rischio specifico, con misure di prevenzione e programma di miglioramento.',
+  att:['Illuminazione e microclima degli ambienti','Incendio, con piano di emergenza ed evacuazione','Lavoratrici gestanti, puerpere o in allattamento','Ergonomia delle postazioni e videoterminali','Stress lavoro-correlato','Movimentazione manuale dei carichi','Rumore e vibrazioni','Campi elettromagnetici e radiazioni ottiche artificiali','Agenti chimici, cancerogeni e mutageni','Amianto, con piano di monitoraggio e controllo','Agenti biologici e atmosfere esplosive (ATEX)'],
+  norme:['D.Lgs. 81/08 e All. IV','D.M. 3 settembre 2021','D.Lgs. 151/01']},
+ {c:'sic',t:'Sicurezza sui luoghi di lavoro',b:'DVR e gestione completa degli adempimenti D.Lgs. 81/08 per aziende di ogni settore.',i:'shield',
+  intro:'Un servizio completo per mettere e mantenere l\'azienda in regola con gli obblighi del Testo Unico sulla sicurezza.',
+  fa:'Partiamo da un audit aziendale e costruiamo un piano di adeguamento e miglioramento su misura, seguendo poi l\'azienda nel tempo.',
+  att:['Audit aziendale sul rispetto degli obblighi normativi','Verifica di coerenza del DVR e della documentazione','Redazione e aggiornamento del DVR','Permessi di lavoro secondo UNI 10449 e verbali','Piano di Emergenza ed Evacuazione (PEE)','DUVRI per i rischi da interferenze','Valutazione dei rischi specifici e antincendio','Formazione obbligatoria di lavoratori e rappresentanti'],
+  norme:['D.Lgs. 81/08, Titolo I','D.Lgs. 81/08, art. 37','UNI 10449']},
+ {c:'prog',t:'Prevenzione incendi',b:'Progetti antincendio, pratiche VV.F., valutazione del rischio e piani di emergenza.',i:'fire',
+  intro:'I nostri professionisti sono iscritti nell\'elenco del Ministero dell\'Interno dei tecnici abilitati alla prevenzione incendi.',
+  fa:'Seguiamo l\'intero iter antincendio: dalla progettazione alle pratiche con i Vigili del Fuoco, fino alle prove di evacuazione e alla formazione degli addetti.',
+  att:['Consulenza per nuove costruzioni e adeguamento di strutture esistenti','Progettazione antincendio e pratiche per valutazione progetto e CPI','Pratiche di rinnovo della conformità antincendio','Certificazioni di impianti e di resistenza al fuoco','Valutazione del rischio incendio','Piani di emergenza ed evacuazione','Prove di evacuazione in aziende, scuole e locali di pubblico spettacolo','Consulenza per aziende a Rischio di Incidente Rilevante (Seveso III)','Corsi per addetti antincendio a rischio basso, medio ed elevato'],
+  norme:['D.M. 05/08/2011','D.M. 3 settembre 2021','D.Lgs. 81/08','D.Lgs. 105/2015']},
+ {c:'qual',t:'HACCP',b:'Piani di autocontrollo igienico-sanitario e formazione per il settore alimentare.',i:'food',
+  intro:'L\'autocontrollo è obbligatorio per tutti gli operatori della filiera alimentare: l\'Operatore del Settore Alimentare (OSA) è responsabile dell\'igiene e della sicurezza dei prodotti. L\'HACCP è il metodo che rende questo controllo ordinato e verificabile.',
+  fa:'Redigiamo il manuale di autocontrollo su misura per l\'attività, formiamo il personale e ne curiamo il riesame periodico.',
+  att:['Analisi dei pericoli da prevenire, eliminare o ridurre','Individuazione dei punti critici di controllo (CCP) e dei limiti critici','Procedure di sorveglianza e azioni correttive','Procedure di verifica periodica dell\'efficacia','Registrazioni proporzionate alle dimensioni dell\'impresa','Formazione e informazione del personale','Monitoraggio dei parametri e riesame del manuale'],
+  norme:['Reg. CE 852/2004','Normativa regionale sulla formazione alimentaristi']},
+ {c:'sic',t:'Formazione lavoratori',b:'Corsi per lavoratori, preposti, dirigenti, RLS, antincendio e primo soccorso, in aula e in FAD.',i:'people',
+  intro:'La formazione è uno dei principali obblighi del Datore di Lavoro e riguarda chiunque svolga un\'attività lavorativa, indipendentemente dal contratto.',
+  fa:'Organizziamo corsi in aula e in FAD, con attestati validi e calendario degli aggiornamenti sotto controllo.',
+  att:['Formazione generale e specifica (rischio basso, medio, alto) e aggiornamenti','Preposti, dirigenti, capocantiere e direttore tecnico di cantiere','RSPP Datore di Lavoro e RLS','Addetti antincendio e primo soccorso','Alimentaristi (HACCP)','Ambienti sospetti di inquinamento o confinati','Lavori in quota e DPI di III categoria, funi, linee vita, ponteggi','Abilitazioni attrezzature: PLE, gru, carrelli elevatori, macchine movimento terra, trattori e altre'],
+  norme:['D.Lgs. 81/08, artt. 37 e 73','Accordo Stato-Regioni','D.M. 02/09/2021']},
+ {c:'can',t:'Sicurezza nei cantieri edili',b:'POS, PSC, PiMUS e verifiche di idoneità per una gestione del cantiere sicura e documentata.',i:'cone',
+  intro:'Le disposizioni su salute e sicurezza si applicano sia nei luoghi di lavoro sia nei cantieri temporanei e mobili, con obblighi specifici per committenti e imprese.',
+  fa:'Predisponiamo o verifichiamo tutta la documentazione di cantiere e supportiamo le imprese su formazione, rischi e attrezzature.',
+  att:['Piano Operativo di Sicurezza (POS)','Piano di Sicurezza e Coordinamento (PSC) e Fascicolo dell\'Opera','PiMUS per ponteggi metallici fissi','Verbali e permessi di lavoro (UNI 10449)','Verifica della documentazione di attrezzature, macchine e DPI','Valutazione dei rischi specifici','Formazione obbligatoria e aggiornamenti','Verifica dell\'idoneità tecnico-professionale di imprese e autonomi'],
+  norme:['D.Lgs. 81/08, Titoli III e IV','D.Lgs. 81/08, art. 37','UNI 10449']},
+ {c:'qual',t:'Tutela della privacy',b:'Adeguamento al GDPR: registri dei trattamenti, informative, nomine e procedure interne.',i:'lock',
+  intro:'Ogni azienda deve disporre di un sistema di gestione dei dati personali, cartacei ed elettronici, che li protegga da perdite e accessi non autorizzati e ne consenta il ripristino.',
+  fa:'Accompagniamo l\'azienda nell\'adeguamento con un percorso calibrato su dimensioni e settore, dalla documentazione alla formazione.',
+  att:['Assessment di policy, procedure, designazioni e misure di sicurezza','Informative, moduli di consenso e lettere di nomina','Registro dei trattamenti e valutazione d\'impatto (DPIA)','Misure tecniche e organizzative, anche informatiche','Formazione del personale','Supporto nelle comunicazioni al Garante'],
+  norme:['Reg. UE 2016/679 (GDPR)','D.Lgs. 196/2003']},
+ {c:'prog',t:'Progettazione impianti tecnologici',b:'Impianti elettrici, meccanici, antincendio e da fonti rinnovabili, progettati secondo norma.',i:'plug',
+  intro:'Progettiamo in modo integrato gli impianti a servizio di edifici civili, commerciali, industriali e ospedalieri, seguendo innovazione tecnologica ed evoluzione normativa.',
+  fa:'Dalla progettazione al collaudo: realizziamo anche "chiavi in mano" impianti fotovoltaici e solari termici ed eseguiamo le verifiche strumentali degli impianti elettrici.',
+  att:['Impianti elettrici in bassa tensione e cabine MT/bt','Illuminazione, anche con rendering fotorealistici','Videosorveglianza, reti LAN, antifurto','Rivelazione e segnalazione automatica incendi','Impianti idrici antincendio','Impianti idrico-sanitari, termici, gas metano e GPL','Quadri di automazione','Fotovoltaico e solare termico','Collaudi: differenziali, isolamento, terra, anello di guasto'],
+  norme:['CEI 64-8','Norme tecniche di settore']},
+ {c:'prog',t:'Progettazione e direzione lavori',b:'Progettazione civile e industriale, supporto alle gare d\'appalto e direzione dei lavori.',i:'ruler',
+  intro:'Un\'esperienza maturata in edilizia residenziale, industriale e lavori pubblici, in collaborazione con strutturisti e professionisti del design.',
+  fa:'Seguiamo l\'opera dall\'idea al cantiere, comprese le pratiche e la documentazione per le gare d\'appalto.',
+  att:['Supporto alle imprese nelle gare d\'appalto (documentazione amministrativa, offerta tecnica ed economica)','Progettazione architettonica e strutturale: residenziale, industriale, opere civili','Impianti di trattamento reflui civili e industriali','Trattamento delle emissioni in atmosfera','Impianti di prima pioggia e fosse biologiche','Impianti di trattamento rifiuti','Direzione lavori pubblici e privati'],
+  norme:['Codice dei contratti pubblici','Normativa edilizia e urbanistica']},
+ {c:'prog',t:'Certificazioni energetiche',b:'Attestati di Prestazione Energetica (APE) e audit energetici per edifici e unità immobiliari.',i:'leaf',
+  intro:'La certificazione energetica misura il rendimento di un edificio e lo colloca in una classe da A4 a G. L\'APE è necessario nelle compravendite e nelle locazioni e il suo indice va riportato negli annunci.',
+  fa:'Eseguiamo audit energetici e redigiamo l\'APE per privati, agenzie immobiliari, imprese edili e amministratori di condominio.',
+  att:['Analisi delle caratteristiche costruttive dell\'edificio','Verifica degli impianti di riscaldamento, climatizzazione e ventilazione','Impianto di produzione di acqua calda sanitaria','Valutazione delle fonti rinnovabili presenti','Orientamento e posizione dell\'edificio','Redazione dell\'Attestato di Prestazione Energetica'],
+  norme:['D.Lgs. 192/2005','D.M. 26 giugno 2015','D.Lgs. 28/2011']},
+ {c:'prog',t:'Transizione Industria 4.0',b:'Perizie e consulenza per accedere ai crediti d\'imposta su beni strumentali e formazione.',i:'chip',
+  intro:'Le misure agevolative per gli investimenti delle imprese sono numerose, tecniche e cambiano spesso: un errore può far perdere crediti e contributi.',
+  fa:'Affianchiamo l\'impresa con ingegneri iscritti all\'albo, dalla consulenza preliminare gratuita fino alla perizia e al calcolo del credito.',
+  att:['Sopralluogo, perizia semplice o asseverata sui beni strumentali','Relazione tecnica su messa in funzione e interconnessione','Calcolo del credito d\'imposta','Formazione 4.0 e fascicolo documentale','Ricerca, sviluppo e innovazione tecnologica','Aggiornamento costante sulle misure disponibili','Prima consulenza gratuita e senza impegno'],
+  norme:['Piano Transizione 4.0 / 5.0','Normativa vigente sui crediti d\'imposta']},
+ {c:'ver',t:'Rilievi architettonici 3D',b:'Rilievi di precisione con Matterport Pro 3: gemello digitale navigabile e misurabile.',i:'scan',
+  intro:'Con la fotocamera Matterport Pro 3 acquisiamo nuvole di punti 3D e immagini ad alta risoluzione di interni ed esterni, ottenendo un gemello digitale dell\'edificio.',
+  fa:'Rilievi accurati, georeferenziati e metricamente affidabili, che riducono i tempi di sopralluogo e migliorano la qualità del progetto.',
+  att:['Progettazione architettonica e ingegneristica','Restauro e conservazione di beni architettonici','Documentazione immobiliare e facility management','Stime e perizie tecniche','Virtual tour e presentazioni interattive','Export per Revit, AutoCAD, Archicad, SketchUp e software BIM'],
+  norme:['Rilievo 3D','BIM ready']},
+ {c:'ver',t:'Verifica attrezzature di sollevamento',b:'Verifiche periodiche di gru, PLE, carriponte e accessori di sollevamento.',i:'hook',
+  intro:'Il Datore di Lavoro deve sottoporre a verifica periodica le attrezzature di sollevamento di cose (oltre 200 kg) e di persone. La prima verifica spetta all\'INAIL, le successive all\'ASL o a un soggetto abilitato.',
+  fa:'Gestiamo le richieste di verifica e il controllo delle scadenze, con verifica documentale e prove funzionali dei dispositivi di sicurezza.',
+  att:['Sollevamento cose: autogru, gru su camion, gru a torre, carriponte, gru a bandiera e a portale, sollevatori telescopici','Sollevamento persone: PLE, cestelli, ponti sospesi e sviluppabili, scale aeree','Verifica della documentazione dell\'attrezzatura','Prove funzionali e verifica dei dispositivi di sicurezza','Programmazione della periodicità (1, 2 o 3 anni)','Controllo trimestrale di funi, catene e accessori'],
+  norme:['D.Lgs. 81/08, art. 71 c. 11','All. VII D.Lgs. 81/08']},
+ {c:'ver',t:'Diagnosi gas radon',b:'Misurazione della concentrazione di radon e progettazione degli interventi di risanamento.',i:'radon',
+  intro:'Il radon è un gas radioattivo invisibile e inodore che risale dal suolo, o si libera da materiali come tufo e granito, e si accumula negli ambienti chiusi. Concentrazioni elevate sono dannose per la salute.',
+  fa:'Misuriamo il radon in aria e in acqua con strumenti che registrano in autonomia, senza interferire con l\'attività, e progettiamo l\'eventuale risanamento.',
+  att:['Misurazione short term in aria, con esito entro 15 giorni','Monitoraggio dell\'andamento giorno/notte e dei picchi','Misurazione del radon disciolto nell\'acqua (pozzi e sorgenti)','Diagnosi delle vie d\'ingresso del gas','Progetto e supervisione del risanamento da esperto abilitato','Collaudo e monitoraggio di verifica'],
+  norme:['D.Lgs. 101/2020','Direttiva 2013/59/Euratom','Livelli di riferimento 300 / 200 Bq/m³']}
+];
+const grid=document.getElementById('servGrid'), sel=document.getElementById('servizio');
+S.forEach((s,i)=>{
+  const el=document.createElement('button');
+  el.type='button';
+  el.className='serv rv'+(i%4?' d'+(i%4):'');
+  el.dataset.c=s.c;
+  el.innerHTML=`<span class="cod mono">S.${String(i+1).padStart(2,'0')}</span>
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">${I[s.i]}</svg>
+    <h3>${s.t}</h3><p>${s.b}</p>
+    <span class="apri mono">Scopri di più +</span>
+    <svg class="frec" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5 4h7v7" stroke="currentColor" stroke-width="1.8"/></svg>`;
+  el.addEventListener('click',()=>apriServizio(i));
+  grid.appendChild(el);
+  const o=document.createElement('option');o.textContent=s.t;sel.appendChild(o);
+});
+/* ---------- Progetti ---------- */
+const P = [
+ {t:'Gi.Ma. Profumi S.a.s.',luogo:'Nola (NA), complesso industriale CIS',anno:'2019/2020',valore:'€ 800.000',
+  intro:'Progettazione e installazione degli impianti tecnologici a servizio dell\'attività commerciale all\'interno del CIS di Nola.',
+  att:['Prevenzione incendi','Impianto sprinkler ad acqua a estinzione automatica','Impianto idranti a estinzione manuale','Impianto di allarme con diffusione sonora (EVAC)','Impianto di rivelazione fumi','Impianto elettrico','Impianto di condizionamento'],
+  tag:['Progettazione impianti','Prevenzione incendi','Installazione']},
+ {t:'Manifattura Tessile Campana S.r.l.',luogo:'San Giuseppe Vesuviano (NA), zona industriale',anno:'In corso d\'opera',valore:'€ 400.000',
+  intro:'Riqualificazione di un capannone industriale: progettazione e installazione degli impianti tecnologici con direzione dei lavori.',
+  att:['Impianto antincendio ad acqua a estinzione manuale (idranti)','Impianto di rivelazione fumi','Impianto elettrico','Installazione di cabina di trasformazione','Pratica di prevenzione incendi','Agibilità e SCIA edilizia'],
+  tag:['Progettazione impianti','Direzione lavori','Pratiche edilizie']},
+ {t:'Mira Group S.r.l.',luogo:'Striano (NA), lotto di circa 20.000 mq',anno:'In corso d\'opera',valore:'€ 900.000',
+  intro:'Riqualificazione di un capannone industriale: progettazione degli impianti tecnologici e coordinamento dei lavori.',
+  att:['Prevenzione incendi','Impianto sprinkler a estinzione automatica','Impianto idranti a estinzione manuale','Impianto di rivelazione fumi','Impianto elettrico','Trattamento delle acque di prima pioggia','Installazione di cabine di trasformazione'],
+  tag:['Progettazione impianti','Coordinamento lavori','Prevenzione incendi']},
+ {t:'Centro Sportivo Caravita',luogo:'Cercola (NA)',anno:'2022',valore:'€ 200.000',
+  intro:'Progettazione antincendio della tribuna autorità del centro sportivo e iter presso la Commissione di vigilanza sui locali di pubblico spettacolo.',
+  att:['Progettazione antincendio della tribuna','Valutazione del progetto antincendio','Pratica per la Commissione di pubblico spettacolo'],
+  tag:['Prevenzione incendi','Pubblico spettacolo'],committente:'Consorzio Terzo Settore – Soc. coop. sociale'}
+];
+const PICO='<path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/>';
+const dlg=document.getElementById('dlg'), dBody=document.getElementById('dlgBody');
+let dlgCtx=null, lastFocus=null;
+function mostra(){lastFocus=document.activeElement;dlg.classList.add('open');dlg.setAttribute('aria-hidden','false');document.body.classList.add('lock');
+  const p=dlg.querySelector('.dlg-panel');p.scrollTop=0;setTimeout(()=>p.focus(),50)}
+function chiudi(){dlg.classList.remove('open');dlg.setAttribute('aria-hidden','true');document.body.classList.remove('lock');lastFocus&&lastFocus.focus()}
+const navBtns=`<div class="dlg-nav"><button data-nav="-1" aria-label="Precedente">←</button><button data-nav="1" aria-label="Successivo">→</button></div>`;
+const lista=a=>`<ul class="dlg-list">${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+function apriServizio(i){
+  const s=S[i]; dlgCtx={tipo:'s',i};
+  dlgCod.textContent=`Servizio S.${String(i+1).padStart(2,'0')} / ${S.length}`;
+  dlgIco.innerHTML=I[s.i]; dlgIco.style.display='';
+  dlgTitle.textContent=s.t; dlgSub.textContent=s.b;
+  dBody.innerHTML=`<div><h4>Di cosa si tratta</h4><p>${s.intro}</p></div>
+    <div><h4>Cosa facciamo</h4><p style="margin-bottom:16px">${s.fa}</p>${lista(s.att)}</div>
+    <div><h4>Riferimenti normativi</h4><div class="dlg-norme">${s.norme.map(n=>`<span>${n}</span>`).join('')}</div></div>
+    <div class="dlg-foot"><button class="btn" data-richiedi="${s.t}">Richiedi questo servizio
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></button>${navBtns}</div>`;
+  if(!dlg.classList.contains('open'))mostra();
+}
+function apriProgetto(i){
+  const p=P[i]; dlgCtx={tipo:'p',i};
+  dlgCod.textContent=`Progetto P.${String(i+1).padStart(2,'0')} / ${P.length}`;
+  dlgIco.innerHTML=PICO; dlgTitle.textContent=p.t; dlgSub.textContent=p.luogo;
+  dBody.innerHTML=`<div class="dlg-dati"><div><small>Anno</small><b>${p.anno}</b></div><div><small>Valore opere</small><b>${p.valore}</b></div><div><small>Committente</small><b style="font-size:15px">${p.committente||p.t}</b></div></div>
+    <div><h4>L'intervento</h4><p>${p.intro}</p></div>
+    <div><h4>Cosa abbiamo realizzato</h4>${lista(p.att)}</div>
+    <div><h4>Ambiti</h4><div class="dlg-norme">${p.tag.map(n=>`<span>${n}</span>`).join('')}</div></div>
+    <div class="dlg-foot"><a class="btn" href="#contatti" data-close>Hai un progetto simile? Parliamone
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></a>${navBtns}</div>`;
+  if(!dlg.classList.contains('open'))mostra();
+}
+dlg.addEventListener('click',e=>{
+  if(e.target.closest('[data-close]')){chiudi();return}
+  const n=e.target.closest('[data-nav]');
+  if(n&&dlgCtx){const d=+n.dataset.nav;
+    if(dlgCtx.tipo==='s')apriServizio((dlgCtx.i+d+S.length)%S.length);else apriProgetto((dlgCtx.i+d+P.length)%P.length);
+    dlg.querySelector('.dlg-panel').scrollTop=0;return}
+  const r=e.target.closest('[data-richiedi]');
+  if(r){sel.value=r.dataset.richiedi;chiudi();document.getElementById('contatti').scrollIntoView({behavior:'smooth'})}
+});
+document.addEventListener('keydown',e=>{
+  if(!dlg.classList.contains('open'))return;
+  if(e.key==='Escape')chiudi();
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft')dlg.querySelector(`[data-nav="${e.key==='ArrowRight'?1:-1}"]`)?.click();
+  if(e.key==='Tab'){const f=[...dlg.querySelectorAll('button,a[href]')];if(!f.length)return;
+    if(e.shiftKey&&document.activeElement===f[0]){e.preventDefault();f[f.length-1].focus()}
+    else if(!e.shiftKey&&document.activeElement===f[f.length-1]){e.preventDefault();f[0].focus()}}
+});
+document.querySelectorAll('.prog[data-p]').forEach(b=>b.addEventListener('click',()=>apriProgetto(+b.dataset.p)));
+
+document.getElementById('filtri').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  document.querySelectorAll('.filtri button').forEach(x=>x.classList.toggle('on',x===b));
+  const f=b.dataset.f;
+  grid.querySelectorAll('.serv').forEach(c=>c.classList.toggle('off',f!=='tutti'&&c.dataset.c!==f));
+});
+
+/* ================= OSSERVATORIO =================
+   Sul sito online le notizie si aggiornano da sole leggendo i feed RSS in FEEDS.
+   Se il caricamento non riesce (o nell'anteprima), viene mostrata la selezione SNAPSHOT. */
+const FEEDS = [
+  { fonte:'PuntoSicuro', url:'https://www.puntosicuro.it/feed.rss' }
+  // altri feed RSS ufficiali possono essere aggiunti qui: { fonte:'INAIL', url:'...' }
+];
+const RSS_PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+const SNAPSHOT = [
+  {f:'PuntoSicuro',d:'2026-11-11',t:'Interpello 5/2026: risposte su DVR, medici competenti e sorveglianza sanitaria',s:'La Commissione interpelli chiarisce aspetti operativi su valutazione dei rischi e sorveglianza sanitaria.',tema:'DVR e rischi',u:'https://www.puntosicuro.it/interpelli-C-114/interpello-5/2026-risposte-su-dvr-medici-competenti-sorveglianza-sanitaria-AR-26930/'},
+  {f:'PuntoSicuro',d:'2026-11-11',t:'Patente a crediti: le novità della Nota INL 2469/2026 nei cantieri',s:'Le nuove indicazioni dell\'Ispettorato per le imprese che operano nei cantieri temporanei o mobili.',tema:'Cantieri',u:'https://www.puntosicuro.it/appalti-costi-della-sicurezza-C-115/patente-a-crediti-le-novita-della-nota-inl-2469/2026-nei-cantieri-AR-26926/'},
+  {f:'PuntoSicuro',d:'2026-11-11',t:'IA in azienda: dal 23 ottobre 2026 entra nella valutazione dei rischi',s:'L\'uso di sistemi di intelligenza artificiale diventa un tema da considerare nel DVR.',tema:'DVR e rischi',u:'https://www.puntosicuro.it/nuove-tecnologie-ia-C-148/ia-in-azienda-dal-23-ottobre-2026-entra-nella-valutazione-dei-rischi-AR-26919/'},
+  {f:'INAIL',d:'2026-11-03',t:'Denunce INAIL, primi nove mesi 2026: infortuni +4,8%, malattie professionali +16,3%',s:'I dati provvisori al 30 settembre segnalano un aumento di infortuni, casi mortali e malattie professionali rispetto al 2025.',tema:'Dati e istituzioni',u:'https://www.inail.it'},
+  {f:'PuntoSicuro',d:'2026-11-10',t:'Rischio rumore e luoghi di lavoro: una checklist per la sicurezza',s:'Uno strumento pratico per verificare esposizione, misure tecniche e dispositivi di protezione.',tema:'DVR e rischi',u:'https://www.puntosicuro.it/rischio-rumore-C-37/rischio-rumore-luoghi-di-lavoro-una-checklist-per-la-sicurezza-AR-26725/'},
+  {f:'PuntoSicuro',d:'2026-11-09',t:'Manutentori antincendio: autodichiarazione per i 3 anni di esperienza',s:'Come attestare l\'esperienza pregressa richiesta ai tecnici manutentori di presidi antincendio.',tema:'Antincendio',u:'https://www.puntosicuro.it/normativa-antincendio-C-87/manutentori-antincendio-autodichiarazione-per-i-3-anni-di-esperienza-AR-26915/'},
+  {f:'PuntoSicuro',d:'2026-11-06',t:'Nota INL 2377/2026: le nuove indicazioni operative sulla formazione',s:'Chiarimenti dell\'Ispettorato su obblighi formativi e controlli.',tema:'Formazione',u:'https://www.puntosicuro.it/normativa-C-65/nota-inl-2377/2026-le-nuove-indicazioni-operative-sulla-formazione-AR-26912/'},
+  {f:'PuntoSicuro',d:'2026-11-09',t:'Agenti cancerogeni: le novità della sesta revisione della direttiva CMRD',s:'Cosa cambia a livello europeo per l\'esposizione ad agenti cancerogeni, mutageni e reprotossici.',tema:'DVR e rischi',u:'https://www.puntosicuro.it/normativa-C-65/agenti-cancerogeni-le-novita-della-sesta-revisione-della-direttiva-cmrd-AR-26917/'},
+  {f:'PuntoSicuro',d:'2026-11-12',t:'Sicurezza dei lavoratori in smart working: il nuovo quadro giuridico',s:'Obblighi del datore di lavoro e tutele per chi lavora da remoto.',tema:'DVR e rischi',u:'https://www.puntosicuro.it/sentenze-commentate-C-103/sicurezza-dei-lavoratori-in-smart-working-il-nuovo-quadro-giuridico-AR-26933/'},
+  {f:'Min. Lavoro',d:'2026-03-02',t:'Piano integrato per la salute e la sicurezza sui luoghi di lavoro 2026',s:'Il piano adottato con D.M. n. 20 del 12 febbraio 2026: prevenzione, formazione e vigilanza.',tema:'Dati e istituzioni',u:'https://www.puntosicuro.it/sicurezza-sul-lavoro-C-1/tipologie-di-contenuto-C-6/normativa-C-65/il-nuovo-piano-integrato-per-la-salute-la-sicurezza-sui-luoghi-di-lavoro-AR-26187/'},
+  {f:'Regione Campania',d:'',t:'Piano Mirato di Prevenzione: buone pratiche sullo stress lavoro-correlato',s:'Il documento regionale su valutazione del rischio psicosociale e ruolo degli attori della prevenzione.',tema:'DVR e rischi',u:'https://www.puntosicuro.it/sorveglianza-sanitaria-malattie-professionali-C-60/rischio-stress-lavoro-correlato-buone-pratiche-valutazione-AR-26239/'}
+];
+const FONTI = [
+  ['INAIL','Dati infortuni, bandi ISI, ricerca e pubblicazioni tecniche','https://www.inail.it'],
+  ['Ministero del Lavoro','Testo Unico, interpelli, decreti e circolari','https://www.lavoro.gov.it'],
+  ['Ispettorato Nazionale del Lavoro','Note operative, vigilanza, patente a crediti','https://www.ispettorato.gov.it'],
+  ['ASL Napoli 3 Sud','Dipartimento di Prevenzione e SPSAL del territorio','https://www.aslnapoli3sud.it'],
+  ['Regione Campania','Piano regionale della prevenzione, bandi e formazione','https://www.regione.campania.it'],
+  ['Vigili del Fuoco','Prevenzione incendi, modulistica SCIA, norme tecniche','https://www.vigilfuoco.it'],
+  ['PuntoSicuro','Quotidiano di settore su sicurezza, ambiente e normativa','https://www.puntosicuro.it'],
+  ['Gazzetta Ufficiale','Testi normativi in vigore','https://www.gazzettaufficiale.it'],
+  ['Ministero della Salute','Prevenzione, HACCP e sicurezza alimentare','https://www.salute.gov.it'],
+  ['ENEA','Efficienza energetica e certificazione degli edifici','https://www.enea.it'],
+  ['Istituto Superiore di Sanità','Radon, agenti chimici e salute ambientale','https://www.iss.it'],
+  ['Garante Privacy','GDPR, provvedimenti e linee guida','https://www.garanteprivacy.it']
+];
+const ARROW='<svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M4 12L12 4M5 4h7v7" stroke="currentColor" stroke-width="1.8"/></svg>';
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=d=>{if(!d)return'';const x=new Date(d);return isNaN(x)?'':x.toLocaleDateString('it-IT',{day:'2-digit',month:'short',year:'numeric'})};
+const classifica=t=>{t=t.toLowerCase();
+  if(/cantier|patente a crediti|ponteggi|pimus|pos\b|psc|edil/.test(t))return'Cantieri';
+  if(/incend|antincendio|vigili del fuoco|evacuaz/.test(t))return'Antincendio';
+  if(/formazion|corso|corsi|accordo stato|addestr/.test(t))return'Formazione';
+  if(/inail|ministero|inl|regione|decreto|piano|dati|statistic/.test(t))return'Dati e istituzioni';
+  return'DVR e rischi'};
+const newsGrid=document.getElementById('newsGrid');
+let temaAttivo='tutti';
+function renderNews(list){
+  newsGrid.innerHTML=list.map((n,i)=>`<a class="news${i===0?' big':''}" href="${esc(n.u)}" target="_blank" rel="noopener" data-t="${esc(n.tema)}">
+      <div class="news-meta mono"><span class="fonte">${esc(n.f)}</span><span>${fmt(n.d)}</span></div>
+      ${i===0?`<span class="tema">${esc(n.tema)}</span>`:''}
+      <h3>${esc(n.t)}</h3>${n.s?`<p>${esc(n.s)}</p>`:''}
+      ${i!==0?`<span class="tema">${esc(n.tema)}</span>`:''}
+      <span class="leggi">${ARROW}</span></a>`).join('');
+  filtraNews();
+}
+function filtraNews(){newsGrid.querySelectorAll('.news').forEach(n=>n.classList.toggle('nascosta',temaAttivo!=='tutti'&&n.dataset.t!==temaAttivo))}
+document.getElementById('temi').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#temi button').forEach(x=>x.classList.toggle('on',x===b));temaAttivo=b.dataset.t;filtraNews()});
+document.getElementById('fontiGrid').innerHTML=FONTI.map((f,i)=>`<a class="fonte-card rv${i%4?' d'+(i%4):''}" href="${f[2]}" target="_blank" rel="noopener"><b>${f[0]}</b><span>${f[1]}</span><em class="mono">${f[2].replace('https://www.','')} ↗</em></a>`).join('');
+renderNews(SNAPSHOT);
+async function caricaFeed(){
+  try{
+    const res=await Promise.all(FEEDS.map(async F=>{
+      const r=await fetch(RSS_PROXY+encodeURIComponent(F.url),{cache:'no-store'});
+      const j=await r.json(); if(j.status!=='ok')throw 0;
+      return j.items.map(it=>({f:F.fonte,d:it.pubDate,t:it.title,s:(it.description||'').replace(/<[^>]+>/g,'').slice(0,150).trim(),tema:classifica(it.title+' '+(it.categories||[]).join(' ')),u:it.link}));
+    }));
+    const live=res.flat().sort((a,b)=>new Date(b.d)-new Date(a.d)).slice(0,9);
+    if(!live.length)throw 0;
+    const istituzionali=SNAPSHOT.filter(n=>n.f!=='PuntoSicuro').slice(0,2);
+    renderNews([...live.slice(0,1),...istituzionali,...live.slice(1)]);
+    const st=document.getElementById('stato');st.classList.add('live');
+    st.querySelector('span').textContent='In aggiornamento automatico · '+new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  }catch(e){/* resta la selezione SNAPSHOT */}
+}
+caricaFeed(); setInterval(caricaFeed,30*60*1000);
+
+/* ---------- Reveal on scroll ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.linea-rv').forEach(el=>io.observe(el));
+
+/* ---------- Contatori numeri ---------- */
+const io2=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting) return; const el=e.target, n=+el.dataset.n; let t0=null;
+  const step=t=>{t0??=t;const p=Math.min((t-t0)/1400,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3))).toString().padStart(2,'0');if(p<1)requestAnimationFrame(step)};
+  requestAnimationFrame(step); io2.unobserve(el);
+}),{threshold:.6});
+document.querySelectorAll('[data-n]').forEach(el=>io2.observe(el));
+
+/* ---------- Metodo: passo attivo ---------- */
+const nEl=document.getElementById('passoN');
+const io3=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){document.querySelectorAll('.passo').forEach(p=>p.classList.remove('att'));e.target.classList.add('att');nEl.textContent=e.target.dataset.p}
+}),{rootMargin:'-45% 0px -45% 0px'});
+document.querySelectorAll('.passo').forEach(p=>io3.observe(p));
+
+/* ---------- Header, progresso, parallasse ---------- */
+const hdr=document.getElementById('top'), bar=document.getElementById('progress'), dis=document.querySelector('.disegno');
+const onScroll=()=>{
+  const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+  hdr.classList.toggle('scrolled',y>60);
+  bar.style.width=(h>0?y/h*100:0)+'%';
+  if(dis&&y<innerHeight) dis.style.transform=`translateY(${y*.18}px)`;
+};
+addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+/* ---------- Menu mobile ---------- */
+const menu=document.getElementById('menu');
+document.getElementById('burger').onclick=()=>menu.classList.toggle('open');
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>menu.classList.remove('open'));
+
+/* ---------- Form (anteprima: nessun invio reale) ---------- */
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const es=document.getElementById('esito');
+  const nome=document.getElementById('nome').value.trim(), mail=document.getElementById('email').value.trim();
+  if(!nome||!/^\S+@\S+\.\S+$/.test(mail)){es.textContent='Inserisci nome ed email validi.';return}
+  if(!document.getElementById('priv').checked){es.textContent='È necessario accettare l\'informativa privacy.';return}
+  es.textContent='Grazie '+nome.split(' ')[0]+'! In questa anteprima il modulo non invia dati: scrivi a info@studioingegnerialuongo.com o chiama +39 081 259 7443.';
+});
+</script>
+</body>
+</html>
